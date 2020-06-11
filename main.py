@@ -1,11 +1,11 @@
 import sys
 import pygame as pg
-
+import Intro_screen
 
 BACKGROUND = pg.Color("darkslategray")
-SCREEN_SIZE = (500, 500)
+SCREEN_SIZE = (1920, 1080)
 FPS = 60
-
+SCREEN = pg.display.set_mode(SCREEN_SIZE)
 
 class App(object):
     def __init__(self):
@@ -40,7 +40,7 @@ class App(object):
         """
         for event in pg.event.get():
            if event.type == pg.QUIT:
-               self.done = True
+                self.done = True
 
     def main_loop(self):
         """
@@ -60,7 +60,7 @@ def main():
     Call the app instance's main_loop function to begin the App.
     """
     pg.init()
-    pg.display.set_mode(SCREEN_SIZE)
+    Intro_screen.game_intro()
     App().main_loop()
     pg.quit()
     sys.exit()
