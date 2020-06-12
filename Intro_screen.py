@@ -53,7 +53,7 @@ def button(msg,x,y,width,height,inactivecolor,activecolor):
     mouse = pg.mouse.get_pos()
     rect = pg.Rect(x, y, width, height)
     rect.center = (x, y)
-    if x + width > mouse[0] > x - width and y + height > mouse[1] > y - height:
+    if x + (width / 2) > mouse[0] > x - (width / 2) and y + (height / 2) > mouse[1] > y - (height / 2):
         pg.draw.rect(main.SCREEN, activecolor, rect)
     else:
         pg.draw.rect(main.SCREEN, inactivecolor, rect)
