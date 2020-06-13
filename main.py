@@ -9,6 +9,7 @@ for m in si.get_monitors():
 SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
 FPS = 60
+COLORS = []
 
 positions = [[45,24],[45,32],[45,36],[45,40],[45,44],[45,48],
 [45,53],[45,57],[45,61],[43,66],[40,70],[37,72],[33,74],[29,75],
@@ -42,12 +43,15 @@ class App(object):
         All calls to drawing functions here.
         No game logic.
         """
-        self.screen.fill((255, 255, 255))
-        self.screen.blit(BACKGROUND, [0,0])
-
         b = Bord(10, 10, 10, 50, 80)
-        b.set_steps(63)
-        b.set_grid(positions, self.screen)
+        self.screen.fill((255, 255, 255))
+        b.get_shitlist()
+        if len(COLORS) == 0:
+            b.set_colors(COLORS)
+        b.set_polygons(self.screen, COLORS)
+        self.screen.blit(BACKGROUND, [0,0])
+        #b.set_steps(63)
+        b.set_grid(positions, self.screen)      
 
         pg.display.update()
 
@@ -58,7 +62,9 @@ class App(object):
         phases.
         """
         for event in pg.event.get():
-           if event.type == pg.QUIT:
+            if event.type == pg.MOUSEBUTTONDOWN:
+                print(pg.mouse.get_pos())
+            if event.type == pg.QUIT:
                self.done = True
 
     def main_loop(self):
