@@ -31,7 +31,7 @@ def game_intro():
         button("Start", (screen_size[0] / 2), (screen_size[1] / 2.5), 200, 75, white, brown)
         button("Regels", (screen_size[0] / 2), (screen_size[1] / 2), 200, 75, white, brown, rules_screen)
         button("Hiscore", (screen_size[0] / 2), (screen_size[1] / 1.65), 200, 75, white, brown, hiscore_screen)
-
+        button("Quit", (screen_size[0] / 10), (screen_size[1] / 1.1), 200, 75, white, brown, quitgame)
         pg.display.update()
         clock.tick(60)
     
@@ -57,6 +57,10 @@ def button(msg, x, y, width, height, inactivecolor, activecolor, action=None):
         pg.draw.rect(main.SCREEN, inactivecolor, rect)
 
     text_objects(msg, smalltext, x, y)
+
+def quitgame():
+    pg.quit()
+    quit()
 
 def rules_screen():
     rules = True
