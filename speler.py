@@ -56,3 +56,5 @@ class Speler(pg.sprite.Sprite):
     def get_amount(self):
         pass
     """
+
+

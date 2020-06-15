@@ -9,27 +9,9 @@ class Bord:
         self.margin = margin
         self.row = row
         self.column = column
-        #self.steps = []
+        self.traps = [5,18,30,41,51,57]
         self.xy = []
-        self.rd_color = []
 
-<<<<<<< Updated upstream
-    """
-    def set_steps(self, amount):
-        for step in range(0, amount+1 ,1):
-            self.steps.append(step)
-
-    def get_steps(self):
-        return self.steps
-    """
-    def set_grid(self, positions, screen):
-        for rw in range(self.row):
-            for clmn in range(self.column):
-                if [rw,clmn] in positions:
-                    x, y = (self.margin + self.width) * clmn + self.margin, (self.margin + self.height) * rw + self.margin
-                    self.xy.append([x, y])
-                    pg.draw.rect(screen, (0,255,0),[x, y, self.width, self.height])
-=======
     def set_grid(self, screen):
         for index in range(0, len(self.positions),1):
             for rw in range(self.row):
@@ -53,37 +35,34 @@ class Bord:
         #self.xy.sort()
         #print(len(self.xy))
         #print(self.xy)
->>>>>>> Stashed changes
               
     def get_grid(self):
         return self.grid
 
-<<<<<<< Updated upstream
-    def set_location(self): 
-        pass
-
-    def get_location(self, step):
-        return self.xy[step]
-=======
     def get_location(self, location):
         return self.xy[location]
->>>>>>> Stashed changes
 
     def set_colors(self, colors):
         choices = [(240,78,152), (0,191,179), (0,119,204), (254,197,20)]
         for key in self.shitlist:
             colors.append(rd.choice(choices))
-
-        print("lengte color lijst is {}".format(len(colors)))
-        print("lengte shitlist is {}".format(len(self.shitlist)))
-        return colors
+        for key in self.shitlist:
+            if key in self.traps:
+                colors[key] = (72,72,72)
 
     def set_polygons(self, screen, colors):
         for key in self.shitlist:
-            #print(key)
             pg.draw.polygon(screen, colors[key], self.shitlist.get(key), 0)
         
-
+    def get_spelerPositions(self):
+        self.positions = [[45,24],[45,32],[45,36],[45,40],[45,44],[45,48],
+                         [45,53],[45,57],[45,61],[43,66],[40,70],[37,72],[33,74],[29,75],
+                         [25,75],[20,74],[16,73],[13,71],[9,67],[7,60],[7,56],[7,52],[7,48],
+                         [7,44],[7,40],[7,36],[7,32],[8,27],[11,24],[14,22],[17,20],[21,19],
+                         [26,19],[30,20],[33,22],[36,25],[38,28],[39,32],[39,36],[39,40],
+                         [39,44],[39,48],[39,53],[39,57],[39,61],[35,65],[31,68],[27,69],
+                         [24,70],[20,68],[16,65],[14,60],[14,54],[14,49],[14,44],[14,39],
+                         [14,35],[14,32],[17,28],[23,26],[28,26],[31,29],[32,33],[25,47]]
 
 
     def get_shitlist(self):
@@ -151,4 +130,3 @@ class Bord:
                          59: [(605, 504),(484, 554),(528, 640),(623, 539)],
                          60: [(622, 544),(529, 638),(601, 694),(656, 578)],
                          61: [(658, 578),(600, 696),(646, 715),(709, 717),(708, 596)]}
-        

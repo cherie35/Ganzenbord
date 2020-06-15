@@ -2,23 +2,22 @@ import sys
 import pygame as pg
 import screeninfo as si
 from bord import Bord
+from speler import Speler
 
+FPS = 60
+COLORS = []
 MONITOR = []
 for m in si.get_monitors():
+    print(m)
     MONITOR.append(m)
 SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
-FPS = 60
-COLORS = []
 
-positions = [[45,24],[45,32],[45,36],[45,40],[45,44],[45,48],
-[45,53],[45,57],[45,61],[43,66],[40,70],[37,72],[33,74],[29,75],
-[25,75],[20,74],[16,73],[13,71],[9,67],[7,60],[7,56],[7,52],[7,48],
-[7,44],[7,40],[7,36],[7,32],[8,27],[11,24],[14,22],[17,20],[21,19],
-[26,19],[30,20],[33,22],[36,25],[38,28],[39,32],[39,36],[39,40],
-[39,44],[39,48],[39,53],[39,57],[39,61],[35,65],[31,68],[27,69],
-[24,70],[20,68],[16,65],[14,60],[14,54],[14,49],[14,44],[14,39],
-[14,35],[14,32],[17,28],[23,26],[28,26],[31,29],[32,33],[25,47]]
+b = Bord(10, 10, 10, 50, 80)
+s = Speler()
+
+all_sprites = pg.sprite.Group()
+all_sprites.add(s)
 
 
 class App(object):
@@ -36,30 +35,25 @@ class App(object):
         For example, updates based on held keys should be found here, but
         updates to single KEYDOWN events would be found in the event loop.
         """
-        pass
+        all_sprites.update()
 
     def render(self):
         """
         All calls to drawing functions here.
         No game logic.
         """
-        b = Bord(10, 10, 10, 50, 80)
-        self.screen.fill((255, 255, 255))
+        
         b.get_shitlist()
-        if len(COLORS) == 0:
-            b.set_colors(COLORS)
+        b.get_spelerPositions()
+        self.screen.fill((255,255,255))
+        if len(COLORS) == 0: b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
         self.screen.blit(BACKGROUND, [0,0])
-<<<<<<< Updated upstream
-        #b.set_steps(63)
-        b.set_grid(positions, self.screen)      
-=======
         b.set_grid(self.screen)
         #s = Speler(b.get_location(0))
         print(b.get_location(58))
         all_sprites.draw(self.screen)
         s.move()  
->>>>>>> Stashed changes
 
         pg.display.update()
 
