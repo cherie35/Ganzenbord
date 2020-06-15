@@ -50,8 +50,16 @@ class App(object):
             b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
         self.screen.blit(BACKGROUND, [0,0])
+<<<<<<< Updated upstream
         #b.set_steps(63)
         b.set_grid(positions, self.screen)      
+=======
+        b.set_grid(self.screen)
+        #s = Speler(b.get_location(0))
+        print(b.get_location(58))
+        all_sprites.draw(self.screen)
+        s.move()  
+>>>>>>> Stashed changes
 
         pg.display.update()
 

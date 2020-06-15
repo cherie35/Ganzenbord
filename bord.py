@@ -13,6 +13,7 @@ class Bord:
         self.xy = []
         self.rd_color = []
 
+<<<<<<< Updated upstream
     """
     def set_steps(self, amount):
         for step in range(0, amount+1 ,1):
@@ -28,15 +29,45 @@ class Bord:
                     x, y = (self.margin + self.width) * clmn + self.margin, (self.margin + self.height) * rw + self.margin
                     self.xy.append([x, y])
                     pg.draw.rect(screen, (0,255,0),[x, y, self.width, self.height])
+=======
+    def set_grid(self, screen):
+        for index in range(0, len(self.positions),1):
+            for rw in range(self.row):
+                for clmn in range(self.column):
+                    if [rw, clmn] == self.positions[index] and len(self.xy) < 65:
+                        print("index {} is a match!".format(index))
+                        print("length of self.xy is {}".format(len(self.xy)))
+                        x, y = (self.margin + self.width) * clmn + self.margin, (self.margin + self.height) * rw + self.margin
+                        self.xy.append([x, y])
+                    #else:
+                        #print("nay")
+                    
+                #if [rw,clmn] == self.positions[index] and len(self.xy) < 64:
+                #if [rw,clmn] in self.positions and len(self.xy) < 64:
+                    #print("row and column: {} staat gelijk aan {}".format([rw,clmn], self.positions.index([rw,clmn])))
+                    #x, y = (self.margin + self.width) * clmn + self.margin, (self.margin + self.height) * rw + self.margin
+                    #self.xy.append([x, y])
+                    #print(x, y ,"with index", index)
+                    #pg.draw.rect(screen, (0,255,0),[x, y, self.width, self.height])
+            #index+=1
+        #self.xy.sort()
+        #print(len(self.xy))
+        #print(self.xy)
+>>>>>>> Stashed changes
               
     def get_grid(self):
         return self.grid
 
+<<<<<<< Updated upstream
     def set_location(self): 
         pass
 
     def get_location(self, step):
         return self.xy[step]
+=======
+    def get_location(self, location):
+        return self.xy[location]
+>>>>>>> Stashed changes
 
     def set_colors(self, colors):
         choices = [(240,78,152), (0,191,179), (0,119,204), (254,197,20)]
