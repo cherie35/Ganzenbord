@@ -44,7 +44,7 @@ class App(object):
             if event.type == pg.QUIT:
                 self.done = True
             if keys[pg.K_g]:
-                Quizb.Quizbehaviour().quiz_popup()
+                Quizb.Quizbehaviour().quiz_popup("red")
 
     def main_loop(self):
         """
