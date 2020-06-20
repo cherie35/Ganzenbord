@@ -1,6 +1,7 @@
 import sys
 import pygame as pg
 import Intro_screen
+import Quizbehaviour as Quizb
 
 BACKGROUND = pg.Color("darkslategray")
 SCREEN_SIZE = (1920, 1080)
@@ -39,8 +40,11 @@ class App(object):
         phases.
         """
         for event in pg.event.get():
-           if event.type == pg.QUIT:
+            keys= pg.key.get_pressed()
+            if event.type == pg.QUIT:
                 self.done = True
+            if keys[pg.K_g]:
+                Quizb.Quizbehaviour().quiz_popup()
 
     def main_loop(self):
         """
