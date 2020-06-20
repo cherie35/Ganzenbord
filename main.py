@@ -60,7 +60,7 @@ def main():
     Call the app instance's main_loop function to begin the App.
     """
     pg.init()
-    Intro_screen.game_intro()
+    Intro_screen.Introscreen().game_intro()
     App().main_loop()
     pg.quit()
     sys.exit()
