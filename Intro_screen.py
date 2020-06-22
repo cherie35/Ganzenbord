@@ -16,10 +16,10 @@ class Introscreen(object):
         self.introloop = True
         self.hiscore = True
         self.rules = True
-    
+        self.largetext = pg.font.Font('fonts/freesansbold.ttf', 115)
+
     def game_intro(self):
-        largetext = pg.font.Font('fonts/freesansbold.ttf', 115)
-    
+
         while self.introloop:
             for event in pg.event.get():
                if event.type == pg.QUIT:
@@ -30,7 +30,7 @@ class Introscreen(object):
     
     
             #Titel
-            self.text_objects("Data Gans", largetext, (self.screen_size[0]/2), (self.screen_size[1]/6))
+            self.text_objects("Data Gans", self.largetext, (self.screen_size[0]/2), (self.screen_size[1]/6))
     
             #Buttons
             self.button("Start", (self.screen_size[0] / 2), (self.screen_size[1] / 2.5), 200, 75, white, brown)
@@ -81,8 +81,7 @@ class Introscreen(object):
             self.moving_background()
     
             self.button("Terug", (self.screen_size[0] / 10), (self.screen_size[1] / 1.1), 200, 75, white, brown, self.game_intro)
-    
-    
+
             pg.display.update()
             self.clock.tick(60)
     

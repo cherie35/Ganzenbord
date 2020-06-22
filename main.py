@@ -45,6 +45,8 @@ class App(object):
                 self.done = True
             if keys[pg.K_g]:
                 Quizb.Quizbehaviour().quiz_popup("red")
+            if keys[pg.K_p]:
+                print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
 
     def main_loop(self):
         """

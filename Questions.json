@@ -5,11 +5,18 @@
         "answer2": "",
         "answer3": ""
   }],
-  "red":[{
+  "red": [{
         "question": "De zee is 100m diep, wat is dieper?",
         "correctanswer": "Je moeder",
         "answer2": "Marianatroch",
         "answer3": "Pinkeltje"
-  }]
+  },
+    {
+      "Question": "Het belangrijkste voor een Data engineer is?",
+        "correctanswer": "Kennis",
+        "answer2": "Vaardigheden",
+        "answer3": "Puppy Eyes"
+    }
+  ]
 
 }

@@ -1,12 +1,18 @@
 import pygame as pg
 import main
-import pygame.freetype as freetype
 import json
 import random
+import roundrects
 
 black = (0, 0, 0)
 white = (255, 255, 255)
 brown = (210, 105, 30)
+red = (255, 0, 0)
+green = (124, 252, 0)
+
+correctanwsers = 0
+questionsasked = 0
+hiscore = [correctanwsers,questionsasked]
 
 class Quizbehaviour(object):
     def __init__(self):
@@ -18,6 +24,8 @@ class Quizbehaviour(object):
         self.answerrectsize = (self.screen_size[0] / 2, self.screen_size[1] / 10)
         self.answerrectcenterpos = (self.screen_size[0] / 5, self.screen_size[1] / 2)
         self.font = pg.font.Font('fonts/freesansbold.ttf', 20)
+        self.lefttextpadding = 50
+
 
     def quiz_popup(self, color):
         questionnumber = 0 #placeholder, has to be a random question from the json
@@ -45,20 +53,18 @@ class Quizbehaviour(object):
             ##draw question rectangle
             rect = pg.Rect(self.screen_size[0] / 10, self.screen_size[1] / 10, self.quizrectsize[0], self.quizrectsize[1])
             rect.center = self.quizrectcenterpos
-            pg.draw.rect(main.SCREEN, brown, rect)
+            roundrects.AAfilledRoundedRect(main.SCREEN, rect, brown)
 
             #draw text on the question rect
-            self.blit_text(main.SCREEN, text, (self.quizrectcenterpos[0] / 2, self.quizrectcenterpos[1] - self.quizrectsize[1] / 2), self.font)
+            self.blit_text(main.SCREEN, text, (self.quizrectcenterpos[0] / 2 + self.lefttextpadding, self.quizrectcenterpos[1] - self.quizrectsize[1] / 2 + 50), self.font)
 
 
             #draw answer buttons
             padding = 0
             for answer in answerlist:
 
-                self.button(answer,(self.screen_size[0] / 2), (self.screen_size[1] / 2.3 + padding),self.answerrectsize[0],self.answerrectsize[1], white, brown)
+                self.button(answer,(self.screen_size[0] / 2), (self.screen_size[1] / 2.3 + padding),self.answerrectsize[0],self.answerrectsize[1], white, brown, correctanswer)
                 padding += 200
-
-
 
             pg.display.update()
             self.clock.tick(60)
@@ -82,18 +88,44 @@ class Quizbehaviour(object):
             y += word_height  # Start on new row.
 
 
-    def button(self, msg, x, y, width, height, inactivecolor, activecolor, action=None):
-        smalltext = pg.font.Font('fonts/freesansbold.ttf', 50)
+    def button(self, msg, x, y, width, height, inactivecolor, activecolor, correctanswer=None):
         mouse = pg.mouse.get_pos()
         click = pg.mouse.get_pressed()
         rect = pg.Rect(x, y, width, height)
         rect.center = (x, y)
-        if x + (width / 2) > mouse[0] > x - (width / 2) and y + (height / 2) > mouse[1] > y - (height / 2):
-            pg.draw.rect(main.SCREEN, activecolor, rect)
-            if click[0] == 1:
-                action()
-        else:
-            pg.draw.rect(main.SCREEN, inactivecolor, rect)
 
-        #self.text_objects(msg, smalltext, x, y)
-        self.blit_text(main.SCREEN,msg,(x,y),self.font)
+        # button click functionality
+        if x + (width / 2) > mouse[0] > x - (width / 2) and y + (height / 2) > mouse[1] > y - (height / 2):
+            roundrects.AAfilledRoundedRect(main.SCREEN, rect, activecolor)
+            if click[0] == 1:
+                if msg == correctanswer:
+                    self.answered_correctly()
+                    roundrects.AAfilledRoundedRect(main.SCREEN, rect, green)
+
+
+                else:
+                    self.answered_wrong()
+                    roundrects.AAfilledRoundedRect(main.SCREEN, rect, red)
+
+                self.blit_text(main.SCREEN, msg,
+                               ((x - width / 2 + self.lefttextpadding), y - self.lefttextpadding / 2), self.font)
+
+                pg.display.update()
+                self.clock.tick(60)
+                pg.time.delay(1000)
+                self.quiz = False
+
+        else:
+            roundrects.AAfilledRoundedRect(main.SCREEN, rect, inactivecolor)
+
+        self.blit_text(main.SCREEN,msg,((x - width / 2 + self.lefttextpadding),y - self.lefttextpadding / 2),self.font)
+
+    def answered_correctly(self):
+        global hiscore
+        hiscore[0] += 1
+        hiscore[1] += 1
+
+    def answered_wrong(self):
+        global hiscore
+        hiscore[1] += 1
+
