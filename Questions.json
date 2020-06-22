@@ -12,7 +12,7 @@
         "answer3": "Pinkeltje"
   },
     {
-      "Question": "Het belangrijkste voor een Data engineer is?",
+        "question": "Het belangrijkste voor een Data engineer is?",
         "correctanswer": "Kennis",
         "answer2": "Vaardigheden",
         "answer3": "Puppy Eyes"

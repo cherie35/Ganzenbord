@@ -14,6 +14,7 @@ class App(object):
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
+        self.quizbehaviour = Quizb.Quizbehaviour()
 
     def update(self):
         """
@@ -44,7 +45,7 @@ class App(object):
             if event.type == pg.QUIT:
                 self.done = True
             if keys[pg.K_g]:
-                Quizb.Quizbehaviour().quiz_popup("red")
+                self.quizbehaviour.quiz_popup("red")
             if keys[pg.K_p]:
                 print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
 

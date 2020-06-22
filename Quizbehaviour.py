@@ -26,22 +26,36 @@ class Quizbehaviour(object):
         self.font = pg.font.Font('fonts/freesansbold.ttf', 20)
         self.lefttextpadding = 50
 
+        #Load questions from JSON and assign them per category to variables
+        with open("Questions.json") as f:
+            self.questiondata = json.load(f)
+        self.red_questions = self.questiondata["red"]
+        self.blue_questions = self.questiondata["blue"]
+
+        self.questioncolors = {
+            "red": self.red_questions,
+            "blue": self.blue_questions
+        }
+
 
     def quiz_popup(self, color):
+
         questionnumber = 0 #placeholder, has to be a random question from the json
 
-        with open("Questions.json") as f:
-            questiondata = json.load(f)
+        questiondata = self.questioncolors.get(color)
+        random.shuffle(questiondata)
 
-        text = questiondata[color][questionnumber]['question']
+
+        text = questiondata[questionnumber]['question']
 
         #put answers in a list and shuffle the list, so that it's ready for blitting
-        correctanswer = questiondata[color][questionnumber]['correctanswer']
-        answer2 = questiondata[color][questionnumber]['answer2']
-        answer3 = questiondata[color][questionnumber]['answer3']
+        correctanswer = questiondata[questionnumber]['correctanswer']
+        answer2 = questiondata[questionnumber]['answer2']
+        answer3 = questiondata[questionnumber]['answer3']
         answerlist = [correctanswer,answer2,answer3]
         random.shuffle(answerlist)
 
+        self.quiz = True
         while self.quiz:
             for event in pg.event.get():
                if event.type == pg.QUIT:
@@ -63,7 +77,7 @@ class Quizbehaviour(object):
             padding = 0
             for answer in answerlist:
 
-                self.button(answer,(self.screen_size[0] / 2), (self.screen_size[1] / 2.3 + padding),self.answerrectsize[0],self.answerrectsize[1], white, brown, correctanswer)
+                self.button(answer,(self.screen_size[0] / 2), (self.screen_size[1] / 2.3 + padding),self.answerrectsize[0],self.answerrectsize[1], white, brown, questiondata, correctanswer)
                 padding += 200
 
             pg.display.update()
@@ -88,7 +102,7 @@ class Quizbehaviour(object):
             y += word_height  # Start on new row.
 
 
-    def button(self, msg, x, y, width, height, inactivecolor, activecolor, correctanswer=None):
+    def button(self, msg, x, y, width, height, inactivecolor, activecolor, questions, correctanswer=None, ):
         mouse = pg.mouse.get_pos()
         click = pg.mouse.get_pressed()
         rect = pg.Rect(x, y, width, height)
@@ -101,6 +115,7 @@ class Quizbehaviour(object):
                 if msg == correctanswer:
                     self.answered_correctly()
                     roundrects.AAfilledRoundedRect(main.SCREEN, rect, green)
+                    self.remove_askedquestion(questions)
 
 
                 else:
@@ -129,3 +144,6 @@ class Quizbehaviour(object):
         global hiscore
         hiscore[1] += 1
 
+    def remove_askedquestion(self,questions):
+        if questions:
+            questions.pop(0)
