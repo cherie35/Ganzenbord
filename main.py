@@ -1,20 +1,23 @@
 import sys
 import pygame as pg
 import screeninfo as si
+import random as rd
+
 from bord import Bord
 from speler import Speler
+from dobbelButton import Dobbel
 
 FPS = 60
 COLORS = []
 MONITOR = []
 for m in si.get_monitors():
-    print(m)
     MONITOR.append(m)
 SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
 
-b = Bord(10, 10, 10, 50, 80)
-s = Speler()
+b = Bord()
+s = Speler(10, 10, 10, 50, 80)
+d = Dobbel()
 
 all_sprites = pg.sprite.Group()
 all_sprites.add(s)
@@ -26,6 +29,7 @@ class App(object):
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
+        self.number = ''
 
     def update(self):
         """
@@ -44,18 +48,18 @@ class App(object):
         """
         
         b.get_shitlist()
-        b.get_spelerPositions()
+        s.get_spelerPositions()
         self.screen.fill((255,255,255))
         if len(COLORS) == 0: b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
         self.screen.blit(BACKGROUND, [0,0])
-        b.set_grid(self.screen)
-        #s = Speler(b.get_location(0))
-        print(b.get_location(58))
+        s.set_xy(self.screen)
         all_sprites.draw(self.screen)
-        s.move()  
+        d.shape(self.screen, pg.mouse.get_pos())
+        d.message_display(self.screen, self.number)
 
         pg.display.update()
+
 
     def event_loop(self):
         """
@@ -63,11 +67,15 @@ class App(object):
         given events should be found here.  Do not confuse the event and update
         phases.
         """
+        #mouse = pg.mouse.get_pos()
         for event in pg.event.get():
-            if event.type == pg.MOUSEBUTTONDOWN:
-                print(pg.mouse.get_pos())
+            
+            if event.type == pg.MOUSEBUTTONDOWN and d.shape(self.screen, pg.mouse.get_pos()) == True:
+                self.number = str(rd.randint(1,6))
+            #    print(pg.mouse.get_pos())
             if event.type == pg.QUIT:
                self.done = True
+        pg.display.update()
 
     def main_loop(self):
         """
