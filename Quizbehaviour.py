@@ -9,11 +9,11 @@ white = (255, 255, 255)
 brown = (210, 105, 30)
 red = (255, 0, 0)
 green = (124, 252, 0)
-yellow = (255 ,255 ,0)
+yellow = (255, 255, 0)
 
 correctanwsers = 0
 questionsasked = 0
-hiscore = [correctanwsers,questionsasked]
+hiscore = [correctanwsers, questionsasked]
 
 class Quizbehaviour(object):
     def __init__(self):
@@ -27,12 +27,13 @@ class Quizbehaviour(object):
         self.font = pg.font.Font('fonts/freesansbold.ttf', 20)
         self.lefttextpadding = 50
         self.largetext = pg.font.Font('fonts/freesansbold.ttf', 60)
+        self.color = ""
 
         #Load questions from JSON and assign them per category to variables
         with open("Questions.json") as f:
             self.questiondata = json.load(f)
-        self.red_questions = self.questiondata["red"]
-        self.blue_questions = self.questiondata["blue"]
+        self.red_questions = self.questiondata["red"].copy()
+        self.blue_questions = self.questiondata["blue"].copy()
 
         self.questioncolors = {
             "red": self.red_questions,
@@ -41,7 +42,7 @@ class Quizbehaviour(object):
 
 
     def quiz_popup(self, color):
-
+        self.color = color
         questiondata = self.questioncolors.get(color)
         random.shuffle(questiondata)
 
@@ -117,7 +118,7 @@ class Quizbehaviour(object):
                 if msg == correctanswer:
                     self.answered_correctly()
                     roundrects.AAfilledRoundedRect(main.SCREEN, rect, green)
-                    self.remove_askedquestion(questions)
+                    self.remove_askedquestion(questions, self.color)
 
 
                 else:
@@ -146,8 +147,11 @@ class Quizbehaviour(object):
         global hiscore
         hiscore[1] += 1
 
-    def remove_askedquestion(self,questions):
-        if questions:
+    def remove_askedquestion(self, questions, color):
+        if len(questions) > 1:
+            questions.pop(0)
+        else:
+            questions.extend(self.questiondata[color])
             questions.pop(0)
 
     def show_score(self):
