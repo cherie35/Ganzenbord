@@ -16,6 +16,8 @@ class App(object):
         self.done = False
         self.quizbehaviour = Quizb.Quizbehaviour()
 
+
+
     def update(self):
         """
         All updates to all actors occur here.
@@ -31,6 +33,7 @@ class App(object):
         All calls to drawing functions here.
         No game logic.
         """
+
         self.screen.fill(BACKGROUND)
         pg.display.update()
 

@@ -9,6 +9,7 @@ white = (255, 255, 255)
 brown = (210, 105, 30)
 red = (255, 0, 0)
 green = (124, 252, 0)
+yellow = (255 ,255 ,0)
 
 correctanwsers = 0
 questionsasked = 0
@@ -25,6 +26,7 @@ class Quizbehaviour(object):
         self.answerrectcenterpos = (self.screen_size[0] / 5, self.screen_size[1] / 2)
         self.font = pg.font.Font('fonts/freesansbold.ttf', 20)
         self.lefttextpadding = 50
+        self.largetext = pg.font.Font('fonts/freesansbold.ttf', 60)
 
         #Load questions from JSON and assign them per category to variables
         with open("Questions.json") as f:
@@ -40,18 +42,16 @@ class Quizbehaviour(object):
 
     def quiz_popup(self, color):
 
-        questionnumber = 0 #placeholder, has to be a random question from the json
-
         questiondata = self.questioncolors.get(color)
         random.shuffle(questiondata)
 
 
-        text = questiondata[questionnumber]['question']
+        text = questiondata[0]['question']
 
-        #put answers in a list and shuffle the list, so that it's ready for blitting
-        correctanswer = questiondata[questionnumber]['correctanswer']
-        answer2 = questiondata[questionnumber]['answer2']
-        answer3 = questiondata[questionnumber]['answer3']
+        #put answers in a list and shuffle the list, so that answers aren't in the same position every time
+        correctanswer = questiondata[0]['correctanswer']
+        answer2 = questiondata[0]['answer2']
+        answer3 = questiondata[0]['answer3']
         answerlist = [correctanswer,answer2,answer3]
         random.shuffle(answerlist)
 
@@ -79,6 +79,8 @@ class Quizbehaviour(object):
 
                 self.button(answer,(self.screen_size[0] / 2), (self.screen_size[1] / 2.3 + padding),self.answerrectsize[0],self.answerrectsize[1], white, brown, questiondata, correctanswer)
                 padding += 200
+
+            self.show_score()
 
             pg.display.update()
             self.clock.tick(60)
@@ -147,3 +149,21 @@ class Quizbehaviour(object):
     def remove_askedquestion(self,questions):
         if questions:
             questions.pop(0)
+
+    def show_score(self):
+        if hiscore[1] == 0:
+            self.text_objects("0%", self.largetext, 1800, 50, white)
+        else:
+            if 100 / hiscore[1] * hiscore[0] > 75:
+                self.text_objects(str(round(100 / hiscore[1] * hiscore[0])) + "%", self.largetext, 1800, 50, green)
+            elif 100 / hiscore[1] * hiscore[0] <= 25:
+                self.text_objects(str(round(100 / hiscore[1] * hiscore[0])) + "%", self.largetext, 1800, 50, red)
+            elif 25 < 100 / hiscore[1] * hiscore[0] <= 75:
+                self.text_objects(str(round(100 / hiscore[1] * hiscore[0])) + "%", self.largetext, 1800, 50, yellow)
+
+
+    def text_objects(self, text, font, center_x, center_y, color):
+        textsurface = font.render(text, True, color)
+        textrect = textsurface.get_rect()
+        textrect.center = (center_x, center_y)
+        main.SCREEN.blit(textsurface, textrect)
