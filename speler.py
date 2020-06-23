@@ -9,12 +9,13 @@ class Speler(pg.sprite.Sprite):
         self.margin = margin
         self.row = row
         self.column = column
+        self.location = 0
+        self.xy = []
 
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load("Data-beestje2.png")
         self.rect =  self.image.get_rect()
         self.rect.center = (490, 910)
-        self.xy = []
 
     def set_xy(self, screen):
         if len(self.xy) < 65:
@@ -25,11 +26,11 @@ class Speler(pg.sprite.Sprite):
                             x, y = (self.margin + self.width) * clmn + self.margin, (self.margin + self.height) * rw + self.margin
                             self.xy.append([x, y])
 
-    def get_location(self, location):
-        return self.xy[location]
-
-    def set_location(self):
-        pass
+    def set_location(self, worp):
+        #print("Current locatie index: {}\nMet positie:  {}\n".format(self.location, self.xy[self.location]))
+        self.location += worp
+        #print("Worp locatie index:    {}\nMet positie:  {}\n\n".format(self.location, self.xy[self.location]))
+        self.rect.center = (self.xy[self.location][0], self.xy[self.location][1])
         #self.rect.x += 5
 
     def get_spelerPositions(self):
