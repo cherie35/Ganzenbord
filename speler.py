@@ -26,11 +26,30 @@ class Speler(pg.sprite.Sprite):
                             x, y = (self.margin + self.width) * clmn + self.margin, (self.margin + self.height) * rw + self.margin
                             self.xy.append([x, y])
 
-    def set_location(self, worp):
-        #print("Current locatie index: {}\nMet positie:  {}\n".format(self.location, self.xy[self.location]))
+    def static_set_location(self, worp):
         self.location += worp
-        #print("Worp locatie index:    {}\nMet positie:  {}\n\n".format(self.location, self.xy[self.location]))
         self.rect.center = (self.xy[self.location][0], self.xy[self.location][1])
+
+
+    def set_location(self, worp):
+        speedX , speedY = 0, 0
+        speed = 5
+        #print("Current locatie index: {}\nMet positie:  {}\n".format(self.location, self.xy[self.location]))
+        for step in range(self.location, self.location+worp, 1):
+            print(step)
+            """
+            diffX = self.xy[step+1][0] - self.xy[step][0]
+            diffY = self.xy[step+1][1] - self.xy[step][1]
+            print("difference in X from {} to {} is: {}".format(step, step+1, diffX))
+            print("difference in Y from {} to {} is: {}".format(step, step+1, diffY))
+            self.rect.x += diffX
+            self.rect.y += diffY
+            """
+        self.location += worp
+        if self.location > 63:
+            self.location = 63 - (self.location - 63)
+        #print("Worp locatie index:    {}\nMet positie:  {}\n\n".format(self.location, self.xy[self.location]))
+        eindPos = self.rect.center = (self.xy[self.location][0], self.xy[self.location][1])
         #self.rect.x += 5
 
     def get_spelerPositions(self):

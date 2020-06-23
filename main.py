@@ -72,6 +72,7 @@ class App(object):
             
             if event.type == pg.MOUSEBUTTONDOWN and d.shape(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1,6))
+                #s.move()
                 s.set_location(int(self.number))
             if event.type == pg.QUIT:
                self.done = True
