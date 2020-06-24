@@ -1,11 +1,13 @@
 import sys
 import pygame as pg
+import dice
 
 
 BACKGROUND = pg.Color("darkslategray")
-SCREEN_SIZE = (500, 500)
+SCREEN_SIZE = (1920, 1080)
 FPS = 60
-
+DICE = 0
+rolled = False
 
 class App(object):
     def __init__(self):
@@ -38,9 +40,19 @@ class App(object):
         given events should be found here.  Do not confuse the event and update
         phases.
         """
+
         for event in pg.event.get():
            if event.type == pg.QUIT:
                self.done = True
+           if event.type == pg.KEYDOWN:
+               if event.key == pg.K_SPACE:
+                   DICE = dice.roll_dice()
+                   rolled = True
+               if (rolled):
+                   dice.display_dice(DICE)
+                   dice.roll_msg()
+                   rolled = False
+
 
     def main_loop(self):
         """
