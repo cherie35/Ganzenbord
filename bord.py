@@ -3,6 +3,7 @@ import random as rd
 
 class Bord:
     def __init__(self):
+        self.shitlist = self.get_shitlist()
         self.traps = [5,18,30,41,51,57]
 
     def set_colors(self, colors):
@@ -25,8 +26,10 @@ class Bord:
 
 
     def get_shitlist(self):
-        #0: [(384, 846),(545, 847),(544, 826),(560, 827),(623, 897),(556, 967),(543, 965),(543, 947),(382, 942)],
-        # tegel nr -1 ivm set_polygons waar de key bij 0 moet beginnen door een lijst
+        """
+        0: [(384, 846),(545, 847),(544, 826),(560, 827),(623, 897),(556, 967),(543, 965),(543, 947),(382, 942)],
+        tegel nr -1 ivm set_polygons waar de key bij 0 moet beginnen door een lijst
+        """
         self.shitlist = {0: [(567,831),(693,846),(695,968),(564,968),(625,897)],
                          1: [(697, 847),(775, 848),(775, 967),(696, 964)],
                          2: [(778, 847),(850, 849),(852, 962),(777, 967)],
@@ -89,3 +92,4 @@ class Bord:
                          59: [(605, 504),(484, 554),(528, 640),(623, 539)],
                          60: [(622, 544),(529, 638),(601, 694),(656, 578)],
                          61: [(658, 578),(600, 696),(646, 715),(709, 717),(708, 596)]}
+        return self.shitlist

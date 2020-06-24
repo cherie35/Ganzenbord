@@ -46,17 +46,16 @@ class App(object):
         All calls to drawing functions here.
         No game logic.
         """
-        
-        b.get_shitlist()
-        s.get_spelerPositions()
         self.screen.fill((255,255,255))
         if len(COLORS) == 0: b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
         self.screen.blit(BACKGROUND, [0,0])
         s.set_xy(self.screen)
         all_sprites.draw(self.screen)
-        d.shape(self.screen, pg.mouse.get_pos())
+        d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, self.number)
+        s.movement()
+
 
         pg.display.update()
 
@@ -67,12 +66,10 @@ class App(object):
         given events should be found here.  Do not confuse the event and update
         phases.
         """
-        #mouse = pg.mouse.get_pos()
         for event in pg.event.get():
             
-            if event.type == pg.MOUSEBUTTONDOWN and d.shape(self.screen, pg.mouse.get_pos()) == True:
+            if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1,6))
-                #s.move()
                 s.set_location(int(self.number))
             if event.type == pg.QUIT:
                self.done = True

@@ -8,7 +8,7 @@ class Dobbel():
         self.black = (0,0,0)
 
 
-    def shape(self, screen, mouse):
+    def hover(self, screen, mouse):
         if 1570 + 50 > mouse[0] > 1570 and 970 + 50 > mouse[1] > 970:
             pg.draw.rect(screen, self.bright_green, (1570,970,50,50), 0)
             return True
