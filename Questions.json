@@ -1,11 +1,11 @@
 {
-  "blue":[{
+  "paars":[{
         "question": "",
         "correctanswer": "",
         "answer2": "",
         "answer3": ""
   }],
-  "red": [{
+  "geel": [{
         "question": "De zee is 100m diep, wat is dieper?",
         "correctanswer": "Je moeder",
         "answer2": "Marianatroch",
@@ -17,5 +17,17 @@
         "answer2": "Vaardigheden",
         "answer3": "Puppy Eyes"
     }
-  ]
+  ],
+    "aqua":[{
+        "question": "",
+        "correctanswer": "",
+        "answer2": "",
+        "answer3": ""
+  }],
+    "blauw":[{
+        "question": "",
+        "correctanswer": "",
+        "answer2": "",
+        "answer3": ""
+  }]
 }

@@ -32,19 +32,36 @@ class Quizbehaviour(object):
         #Load questions from JSON and assign them per category to variables
         with open("Questions.json") as f:
             self.questiondata = json.load(f)
-        self.red_questions = self.questiondata["red"].copy()
-        self.blue_questions = self.questiondata["blue"].copy()
+        self.yellow_questions = self.questiondata["geel"].copy()
+        self.blue_questions = self.questiondata["blauw"].copy()
+        self.aqua_questions = self.questiondata["aqua"].copy()
+        self.paars_questions = self.questiondata["paars"].copy()
 
         self.questioncolors = {
-            "red": self.red_questions,
-            "blue": self.blue_questions
+            "geel": self.yellow_questions,
+            "blauw": self.blue_questions,
+            "paars": self.aqua_questions,
+            "aqua": self.paars_questions
+        }
+
+        self.lookuprgb = {
+            (240,78,152): "paars",
+            (0,191,179): "aqua",
+            (0, 119, 204): "blauw",
+            (254, 197, 20): "geel",
+            (72, 72, 72): "grijs"
         }
 
 
     def quiz_popup(self, color):
-        self.color = color
+        self.quiz = True
+
+        self.color = self.lookuprgb[color]
         self.question_bg = pg.image.load("Questions_bg.png")
-        questiondata = self.questioncolors.get(color)
+
+        if self.color == "grijs":
+            self.quiz = False
+        questiondata = self.questioncolors.get(self.color)
         random.shuffle(questiondata)
 
 
@@ -57,7 +74,7 @@ class Quizbehaviour(object):
         answerlist = [correctanswer,answer2,answer3]
         random.shuffle(answerlist)
 
-        self.quiz = True
+
         while self.quiz:
             for event in pg.event.get():
                if event.type == pg.QUIT:

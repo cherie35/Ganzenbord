@@ -26,11 +26,9 @@ MONITOR = []
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
 
 b = Bord()
-s = Speler(10, 10, 10, 50, 80)
 d = Dobbel()
 
-all_sprites = pg.sprite.Group()
-all_sprites.add(s)
+
 
 
 
@@ -43,6 +41,10 @@ class App(object):
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.introbkgd = pg.image.load("mountains.png").convert()
         self.screen_x = 0
+        self.s = Speler(10, 10, 10, 50, 80)
+
+        self.all_sprites = pg.sprite.Group()
+        self.all_sprites.add(self.s)
 
         self.number = ''
 
@@ -55,7 +57,7 @@ class App(object):
         For example, updates based on held keys should be found here, but
         updates to single KEYDOWN events would be found in the event loop.
         """
-        all_sprites.update()
+        self.all_sprites.update()
 
     def render(self):
         """
@@ -67,12 +69,14 @@ class App(object):
         if len(COLORS) == 0: b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
         self.screen.blit(BACKGROUND, [0,0])
-        s.set_xy(self.screen)
-        all_sprites.draw(self.screen)
+        self.s.set_xy(self.screen)
+        self.all_sprites.draw(self.screen)
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
-        s.movement()
+        self.s.movement()
+
+        self.quizbehaviour.show_score()
 
         pg.display.update()
 
@@ -90,12 +94,14 @@ class App(object):
             if event.type == pg.QUIT:
                 self.done = True
             if keys[pg.K_g]:
-                self.quizbehaviour.quiz_popup("red")
+                self.quizbehaviour.quiz_popup((254, 197, 20))
             if keys[pg.K_p]:
                 print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1, 6))
-                s.set_location(int(self.number))
+                self.s.set_location(int(self.number))
+                self.quizbehaviour.quiz_popup(COLORS[self.s.location])
+
                 
 
 
