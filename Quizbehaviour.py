@@ -24,9 +24,9 @@ class Quizbehaviour(object):
         self.quizrectcenterpos = (self.screen_size[0] / 2, self.screen_size[1] / 6)
         self.answerrectsize = (self.screen_size[0] / 2, self.screen_size[1] / 10)
         self.answerrectcenterpos = (self.screen_size[0] / 5, self.screen_size[1] / 2)
-        self.font = pg.font.Font('fonts/freesansbold.ttf', 20)
+        self.font = pg.font.Font('freesansbold.ttf', 20)
         self.lefttextpadding = 50
-        self.largetext = pg.font.Font('fonts/freesansbold.ttf', 60)
+        self.largetext = pg.font.Font('freesansbold.ttf', 60)
         self.color = ""
 
         #Load questions from JSON and assign them per category to variables

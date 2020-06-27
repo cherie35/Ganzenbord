@@ -9,9 +9,8 @@ from bord import Bord
 from speler import Speler
 from dobbelButton import Dobbel
 
-#SCREEN_SIZE = (1920, 1080)
+SCREEN_SIZE = (1920, 1080)
 SCREEN = pg.display.set_mode(SCREEN_SIZE)
-
 
 
 FPS = 60
@@ -19,7 +18,9 @@ COLORS = []
 MONITOR = []
 for m in si.get_monitors():
     MONITOR.append(m)
-SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
+    print(MONITOR[0])
+#SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
+#SCREEN = pg.display.set_mode(SCREEN_SIZE)
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
 
 b = Bord()
@@ -110,7 +111,6 @@ def main():
     """
     pg.init()
     Intro_screen.Introscreen().game_intro()
-    #pg.display.set_mode(SCREEN_SIZE, pg.FULLSCREEN)
     App().main_loop()
     pg.quit()
     sys.exit()

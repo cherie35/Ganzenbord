@@ -10,13 +10,13 @@ class Introscreen(object):
     def __init__(self):
 
         self.clock = pg.time.Clock()
-        self.introbkgd = pg.image.load("images/mountains.png").convert()
+        self.introbkgd = pg.image.load("mountains.png").convert()
         self.screen_x = 0
         self.screen_size = main.SCREEN_SIZE
         self.introloop = True
         self.hiscore = True
         self.rules = True
-        self.largetext = pg.font.Font('fonts/freesansbold.ttf', 115)
+        self.largetext = pg.font.Font('freesansbold.ttf', 115)
 
     def game_intro(self):
 
@@ -47,7 +47,7 @@ class Introscreen(object):
         main.SCREEN.blit(textsurface, textrect)
     
     def button(self, msg, x, y, width, height, inactivecolor, activecolor, action=None):
-        smalltext = pg.font.Font('fonts/freesansbold.ttf', 50)
+        smalltext = pg.font.Font('freesansbold.ttf', 50)
         mouse = pg.mouse.get_pos()
         click = pg.mouse.get_pressed()
         rect = pg.Rect(x, y, width, height)
