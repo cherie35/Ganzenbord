@@ -2,11 +2,33 @@ import sys
 import pygame as pg
 import Intro_screen
 import Quizbehaviour as Quizb
+import screeninfo as si
+import random as rd
 
-BACKGROUND = pg.Color("darkslategray")
-SCREEN_SIZE = (1920, 1080)
-FPS = 60
+from bord import Bord
+from speler import Speler
+from dobbelButton import Dobbel
+
+#SCREEN_SIZE = (1920, 1080)
 SCREEN = pg.display.set_mode(SCREEN_SIZE)
+
+
+
+FPS = 60
+COLORS = []
+MONITOR = []
+for m in si.get_monitors():
+    MONITOR.append(m)
+SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
+BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
+
+b = Bord()
+s = Speler(10, 10, 10, 50, 80)
+d = Dobbel()
+
+all_sprites = pg.sprite.Group()
+all_sprites.add(s)
+
 
 class App(object):
     def __init__(self):
@@ -16,6 +38,7 @@ class App(object):
         self.done = False
         self.quizbehaviour = Quizb.Quizbehaviour()
 
+        self.number = ''
 
 
     def update(self):
@@ -26,7 +49,7 @@ class App(object):
         For example, updates based on held keys should be found here, but
         updates to single KEYDOWN events would be found in the event loop.
         """
-        pass
+        all_sprites.update()
 
     def render(self):
         """
@@ -34,8 +57,18 @@ class App(object):
         No game logic.
         """
 
-        self.screen.fill(BACKGROUND)
+        self.screen.fill((255,255,255))
+        if len(COLORS) == 0: b.set_colors(COLORS)
+        b.set_polygons(self.screen, COLORS)
+        self.screen.blit(BACKGROUND, [0,0])
+        s.set_xy(self.screen)
+        all_sprites.draw(self.screen)
+        d.hover(self.screen, pg.mouse.get_pos())
+        d.message_display(self.screen, self.number)
+        s.movement()
+
         pg.display.update()
+
 
     def event_loop(self):
         """
@@ -44,6 +77,7 @@ class App(object):
         phases.
         """
         for event in pg.event.get():
+
             keys= pg.key.get_pressed()
             if event.type == pg.QUIT:
                 self.done = True
@@ -51,6 +85,11 @@ class App(object):
                 self.quizbehaviour.quiz_popup("red")
             if keys[pg.K_p]:
                 print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
+            if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
+                self.number = str(rd.randint(1,6))
+                s.set_location(int(self.number))
+        pg.display.update()
+
 
     def main_loop(self):
         """
@@ -71,6 +110,7 @@ def main():
     """
     pg.init()
     Intro_screen.Introscreen().game_intro()
+    #pg.display.set_mode(SCREEN_SIZE, pg.FULLSCREEN)
     App().main_loop()
     pg.quit()
     sys.exit()
