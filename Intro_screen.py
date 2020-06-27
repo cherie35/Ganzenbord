@@ -89,8 +89,8 @@ class Introscreen(object):
             self.moving_background()
 
             #draw background rectangle
-            rect = pg.Rect(500, 500, 1300, 650)
-            rect.center = (self.screen_size[0] / 2 - 150, self.screen_size[1] / 2 - 100)
+            rect = pg.Rect(500, 500, 1600, 750)
+            rect.center = (self.screen_size[0] / 2, self.screen_size[1] / 2 - 60)
             pg.draw.rect(main.SCREEN, brown, rect)
 
 

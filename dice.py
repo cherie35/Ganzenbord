@@ -71,7 +71,6 @@ while status == False:
             rolled = True
 
     gameDisplay.fill(BACKGROUND)
-    game_menu()
     display_dice(DICE)
     if (rolled):
         roll_msg()
