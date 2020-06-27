@@ -1,13 +1,39 @@
 import sys
 import pygame as pg
 import dice
+import Intro_screen
+import Quizbehaviour as Quizb
+import screeninfo as si
+import random as rd
 
+from bord import Bord
+from speler import Speler
+from dobbelButton import Dobbel
 
-BACKGROUND = pg.Color("darkslategray")
 SCREEN_SIZE = (1920, 1080)
-FPS = 60
+SCREEN = pg.display.set_mode(SCREEN_SIZE)
+
 DICE = 0
 rolled = False
+
+FPS = 60
+COLORS = []
+MONITOR = []
+for m in si.get_monitors():
+    MONITOR.append(m)
+    print(MONITOR[0])
+#SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
+#SCREEN = pg.display.set_mode(SCREEN_SIZE)
+BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
+
+b = Bord()
+s = Speler(10, 10, 10, 50, 80)
+d = Dobbel()
+
+all_sprites = pg.sprite.Group()
+all_sprites.add(s)
+
+
 
 class App(object):
     def __init__(self):
@@ -15,6 +41,10 @@ class App(object):
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
+        self.quizbehaviour = Quizb.Quizbehaviour()
+
+        self.number = ''
+
 
     def update(self):
         """
@@ -24,15 +54,26 @@ class App(object):
         For example, updates based on held keys should be found here, but
         updates to single KEYDOWN events would be found in the event loop.
         """
-        pass
+        all_sprites.update()
 
     def render(self):
         """
         All calls to drawing functions here.
         No game logic.
         """
-        self.screen.fill(BACKGROUND)
+
+        self.screen.fill((255,255,255))
+        if len(COLORS) == 0: b.set_colors(COLORS)
+        b.set_polygons(self.screen, COLORS)
+        self.screen.blit(BACKGROUND, [0,0])
+        s.set_xy(self.screen)
+        all_sprites.draw(self.screen)
+        d.hover(self.screen, pg.mouse.get_pos())
+        d.message_display(self.screen, self.number)
+        s.movement()
+
         pg.display.update()
+
 
     def event_loop(self):
         """
@@ -42,8 +83,18 @@ class App(object):
         """
 
         for event in pg.event.get():
-           if event.type == pg.QUIT:
-               self.done = True
+
+            keys= pg.key.get_pressed()
+            if event.type == pg.QUIT:
+                self.done = True
+            if keys[pg.K_g]:
+                self.quizbehaviour.quiz_popup("red")
+            if keys[pg.K_p]:
+                print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
+            if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
+                self.number = str(rd.randint(1,6))
+                s.set_location(int(self.number))
+                
            if event.type == pg.KEYDOWN:
                if event.key == pg.K_SPACE:
                    DICE = dice.roll_dice()
@@ -52,6 +103,9 @@ class App(object):
                    dice.display_dice(DICE)
                    dice.roll_msg()
                    rolled = False
+
+        pg.display.update()
+
 
 
     def main_loop(self):
@@ -72,7 +126,7 @@ def main():
     Call the app instance's main_loop function to begin the App.
     """
     pg.init()
-    pg.display.set_mode(SCREEN_SIZE)
+    Intro_screen.Introscreen().game_intro()
     App().main_loop()
     pg.quit()
     sys.exit()
