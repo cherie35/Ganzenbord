@@ -43,6 +43,7 @@ class Quizbehaviour(object):
 
     def quiz_popup(self, color):
         self.color = color
+        self.question_bg = pg.image.load("Questions_bg.png")
         questiondata = self.questioncolors.get(color)
         random.shuffle(questiondata)
 
@@ -67,6 +68,7 @@ class Quizbehaviour(object):
 
             ##draw question rectangle
             rect = pg.Rect(self.screen_size[0] / 10, self.screen_size[1] / 10, self.quizrectsize[0], self.quizrectsize[1])
+            main.SCREEN.blit(self.question_bg, (1,1))
             rect.center = self.quizrectcenterpos
             roundrects.AAfilledRoundedRect(main.SCREEN, rect, brown)
 
