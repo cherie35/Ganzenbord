@@ -70,6 +70,7 @@ class App(object):
         all_sprites.draw(self.screen)
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, self.number)
+        d.roll_outcome(self.screen, self.number)
         s.movement()
 
         pg.display.update()
@@ -84,7 +85,7 @@ class App(object):
 
         for event in pg.event.get():
 
-            keys= pg.key.get_pressed()
+            keys = pg.key.get_pressed()
             if event.type == pg.QUIT:
                 self.done = True
             if keys[pg.K_g]:
@@ -92,17 +93,10 @@ class App(object):
             if keys[pg.K_p]:
                 print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
-                self.number = str(rd.randint(1,6))
+                self.number = str(rd.randint(1, 6))
                 s.set_location(int(self.number))
                 
-           if event.type == pg.KEYDOWN:
-               if event.key == pg.K_SPACE:
-                   DICE = dice.roll_dice()
-                   rolled = True
-               if (rolled):
-                   dice.display_dice(DICE)
-                   dice.roll_msg()
-                   rolled = False
+
 
         pg.display.update()
 
