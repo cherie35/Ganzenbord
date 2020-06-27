@@ -1,10 +1,23 @@
 import sys
 import pygame as pg
+import screeninfo as si
+from bord import Bord
+from speler import Speler
 
-
-BACKGROUND = pg.Color("darkslategray")
-SCREEN_SIZE = (500, 500)
 FPS = 60
+COLORS = []
+MONITOR = []
+for m in si.get_monitors():
+    print(m)
+    MONITOR.append(m)
+SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
+BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
+
+b = Bord(10, 10, 10, 50, 80)
+s = Speler()
+
+all_sprites = pg.sprite.Group()
+all_sprites.add(s)
 
 
 class App(object):
@@ -22,14 +35,26 @@ class App(object):
         For example, updates based on held keys should be found here, but
         updates to single KEYDOWN events would be found in the event loop.
         """
-        pass
+        all_sprites.update()
 
     def render(self):
         """
         All calls to drawing functions here.
         No game logic.
         """
-        self.screen.fill(BACKGROUND)
+        
+        b.get_shitlist()
+        b.get_spelerPositions()
+        self.screen.fill((255,255,255))
+        if len(COLORS) == 0: b.set_colors(COLORS)
+        b.set_polygons(self.screen, COLORS)
+        self.screen.blit(BACKGROUND, [0,0])
+        b.set_grid(self.screen)
+        #s = Speler(b.get_location(0))
+        print(b.get_location(58))
+        all_sprites.draw(self.screen)
+        s.move()  
+
         pg.display.update()
 
     def event_loop(self):
@@ -39,7 +64,9 @@ class App(object):
         phases.
         """
         for event in pg.event.get():
-           if event.type == pg.QUIT:
+            if event.type == pg.MOUSEBUTTONDOWN:
+                print(pg.mouse.get_pos())
+            if event.type == pg.QUIT:
                self.done = True
 
     def main_loop(self):
@@ -60,7 +87,7 @@ def main():
     Call the app instance's main_loop function to begin the App.
     """
     pg.init()
-    pg.display.set_mode(SCREEN_SIZE)
+    pg.display.set_mode(SCREEN_SIZE, pg.FULLSCREEN)
     App().main_loop()
     pg.quit()
     sys.exit()
