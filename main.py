@@ -1,9 +1,8 @@
 import sys
 import pygame as pg
-import dice
 import Intro_screen
 import Quizbehaviour as Quizb
-import screeninfo as si
+#import screeninfo as si
 import random as rd
 
 from bord import Bord
@@ -19,9 +18,9 @@ rolled = False
 FPS = 60
 COLORS = []
 MONITOR = []
-for m in si.get_monitors():
-    MONITOR.append(m)
-    print(MONITOR[0])
+#for m in si.get_monitors():
+#    MONITOR.append(m)
+#    print(MONITOR[0])
 #SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
 #SCREEN = pg.display.set_mode(SCREEN_SIZE)
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
@@ -95,7 +94,7 @@ class App(object):
                 self.number = str(rd.randint(1,6))
                 s.set_location(int(self.number))
                 
-           if event.type == pg.KEYDOWN:
+            if event.type == pg.KEYDOWN:
                if event.key == pg.K_SPACE:
                    DICE = dice.roll_dice()
                    rolled = True
