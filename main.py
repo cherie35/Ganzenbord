@@ -69,7 +69,7 @@ class App(object):
         s.set_xy(self.screen)
         all_sprites.draw(self.screen)
         d.hover(self.screen, pg.mouse.get_pos())
-        d.message_display(self.screen, self.number)
+        d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
         s.movement()
 
