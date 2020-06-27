@@ -23,7 +23,7 @@ class Dobbel():
 
 
     def hover(self, screen, mouse):
-        if 1570 + 50 > mouse[0] > 1570 and 935 + 50 > mouse[1] > 935:
+        if 1570 + 100 > mouse[0] > 1570 and 935 + 50 > mouse[1] > 935:
             roundrects.AAfilledRoundedRect(screen, self.button, self.amazing_orange)
             return True
         else:
