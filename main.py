@@ -1,11 +1,18 @@
 import sys
 import pygame as pg
+import Intro_screen
+import Quizbehaviour as Quizb
 import screeninfo as si
 import random as rd
 
 from bord import Bord
 from speler import Speler
 from dobbelButton import Dobbel
+
+#SCREEN_SIZE = (1920, 1080)
+SCREEN = pg.display.set_mode(SCREEN_SIZE)
+
+
 
 FPS = 60
 COLORS = []
@@ -29,7 +36,10 @@ class App(object):
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
+        self.quizbehaviour = Quizb.Quizbehaviour()
+
         self.number = ''
+
 
     def update(self):
         """
@@ -46,6 +56,7 @@ class App(object):
         All calls to drawing functions here.
         No game logic.
         """
+
         self.screen.fill((255,255,255))
         if len(COLORS) == 0: b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
@@ -55,7 +66,6 @@ class App(object):
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, self.number)
         s.movement()
-
 
         pg.display.update()
 
@@ -67,13 +77,19 @@ class App(object):
         phases.
         """
         for event in pg.event.get():
-            
+
+            keys= pg.key.get_pressed()
+            if event.type == pg.QUIT:
+                self.done = True
+            if keys[pg.K_g]:
+                self.quizbehaviour.quiz_popup("red")
+            if keys[pg.K_p]:
+                print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1,6))
                 s.set_location(int(self.number))
-            if event.type == pg.QUIT:
-               self.done = True
         pg.display.update()
+
 
     def main_loop(self):
         """
@@ -93,7 +109,8 @@ def main():
     Call the app instance's main_loop function to begin the App.
     """
     pg.init()
-    pg.display.set_mode(SCREEN_SIZE, pg.FULLSCREEN)
+    Intro_screen.Introscreen().game_intro()
+    #pg.display.set_mode(SCREEN_SIZE, pg.FULLSCREEN)
     App().main_loop()
     pg.quit()
     sys.exit()
