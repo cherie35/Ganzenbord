@@ -1,5 +1,6 @@
 import sys
 import pygame as pg
+import dice
 import Intro_screen
 import Quizbehaviour as Quizb
 import screeninfo as si
@@ -12,6 +13,8 @@ from dobbelButton import Dobbel
 SCREEN_SIZE = (1920, 1080)
 SCREEN = pg.display.set_mode(SCREEN_SIZE)
 
+DICE = 0
+rolled = False
 
 FPS = 60
 COLORS = []
@@ -29,6 +32,7 @@ d = Dobbel()
 
 all_sprites = pg.sprite.Group()
 all_sprites.add(s)
+
 
 
 class App(object):
@@ -77,6 +81,7 @@ class App(object):
         given events should be found here.  Do not confuse the event and update
         phases.
         """
+
         for event in pg.event.get():
 
             keys= pg.key.get_pressed()
@@ -89,7 +94,18 @@ class App(object):
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1,6))
                 s.set_location(int(self.number))
+                
+           if event.type == pg.KEYDOWN:
+               if event.key == pg.K_SPACE:
+                   DICE = dice.roll_dice()
+                   rolled = True
+               if (rolled):
+                   dice.display_dice(DICE)
+                   dice.roll_msg()
+                   rolled = False
+
         pg.display.update()
+
 
 
     def main_loop(self):
