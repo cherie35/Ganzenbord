@@ -41,6 +41,8 @@ class App(object):
         self.clock = pg.time.Clock()
         self.done = False
         self.quizbehaviour = Quizb.Quizbehaviour()
+        self.introbkgd = pg.image.load("mountains.png").convert()
+        self.screen_x = 0
 
         self.number = ''
 
@@ -61,7 +63,7 @@ class App(object):
         No game logic.
         """
 
-        self.screen.fill((255,255,255))
+        self.moving_background()
         if len(COLORS) == 0: b.set_colors(COLORS)
         b.set_polygons(self.screen, COLORS)
         self.screen.blit(BACKGROUND, [0,0])
@@ -112,6 +114,14 @@ class App(object):
             self.render()
             self.clock.tick(FPS)
 
+    def moving_background(self):
+        # moving background
+        rel_x = self.screen_x % self.introbkgd.get_rect().width
+        SCREEN.blit(self.introbkgd, (rel_x - self.introbkgd.get_rect().width, 0))
+        if rel_x < SCREEN_SIZE[0]:
+            SCREEN.blit(self.introbkgd, (rel_x, 0))
+        self.screen_x -= 1
+
 
 def main():
     """
@@ -123,6 +133,7 @@ def main():
     App().main_loop()
     pg.quit()
     sys.exit()
+
 
 
 if __name__ == "__main__":
