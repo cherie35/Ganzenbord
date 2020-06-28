@@ -1,6 +1,7 @@
 import sys
 import pygame as pg
 import main
+import overview
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -22,7 +23,7 @@ class Introscreen(object):
         self.manual.set_colorkey(black)
 
     def game_intro(self):
-
+        self.introloop = True
         while self.introloop:
             for event in pg.event.get():
                if event.type == pg.QUIT:
@@ -30,7 +31,7 @@ class Introscreen(object):
                    quit()
     
             self.moving_background()
-    
+
     
             #Titel
             self.text_objects("Data Gans", self.largetext, (self.screen_size[0]/2), (self.screen_size[1]/6))
@@ -40,6 +41,7 @@ class Introscreen(object):
             self.button("Regels", (self.screen_size[0] / 2), (self.screen_size[1] / 2), 200, 75, white, brown, self.rules_screen)
             self.button("Hiscore", (self.screen_size[0] / 2), (self.screen_size[1] / 1.65), 200, 75, white, brown, self.hiscore_screen)
             self.button("Quit", (self.screen_size[0] - 250), (self.screen_size[1] / 1.1), 200, 75, white, brown, self.quitgame)
+
             pg.display.update()
             self.clock.tick(60)
 

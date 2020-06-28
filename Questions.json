@@ -37,9 +37,59 @@
         "answer3": ""
   }],
     "groen":[{
-        "question": "groen",
-        "correctanswer": "",
-        "answer2": "",
-        "answer3": ""
-  }]
+        "question": "Welk van het volgende is een data quality dimensie:",
+        "correctanswer": "Beide antwoorden zijn goed",
+        "answer2": "Consistentie",
+        "answer3": "Integriteit"
+  },
+    {
+        "question": "waarom zouden bedrijven belang moeten hechten aan de kwaliteit van hun gegevens",
+        "correctanswer": "Betere data kwaliteit betekent betere beslissingen",
+        "answer2": "Niet, data kwaliteit voegt geen waarde toe",
+        "answer3": "Betere data = meer inkomsten"
+  },
+    {
+        "question": "Wat doen geverifieerde gegevens?",
+        "correctanswer": "goede kwaliteit data mogelijk maken",
+        "answer2": "gegevens verifieeren",
+        "answer3": "toe staan dat bronnen worden erkend"
+  },
+    {
+        "question": "Wat wordt er bedoeld met data kwaliteit",
+        "correctanswer": "Hoe betrouwbaar en effectief de gegevens zijn voor het doel",
+        "answer2": "Hoe goed de gegevensbron is",
+        "answer3": "Of de opgeslagen gegevens correct zijn"
+  },
+    {
+        "question": "Wat is een data warehouse",
+        "correctanswer": "\nEen grote opslag van gegevens verzameld uit een breed scala aan bronnen binnen een bedrijf dat wordt gebruikt om managementbeslissingen te sturen",
+        "answer2": "een warehouse in een database",
+        "answer3": "een warehouse vol met databases"
+  },
+    {
+        "question": "Wat is data mining",
+        "correctanswer": "Het proces van het onderzoeken van grote, reeds bestaande databases om nieuwe informatie te genereren",
+        "answer2": "Het verzamelen van gegevens om een nieuwe database te maken",
+        "answer3": "Het proces van het delven van gegevens"
+  },
+    {
+        "question": "Wat moet er gebeuren met ontbrekende waardes in binnenkomende data",
+        "correctanswer": "Data niet importeren, en een log maken van de data met ontbrekende waardes",
+        "answer2": "negeren en data blijven importeren",
+        "answer3": "ontbrekende waarde vullen met willekeurige data en dan importeren"
+  },
+    {
+        "question": "\nWat wordt bedoeld met de term 'nauwkeurigheid' binnen data kwaliteit?",
+        "correctanswer": "De mate waarin een waarde de werkelijke waarde benadert.",
+        "answer2": "Het detailniveau waarop gegevens worden opgeslagen.",
+        "answer3": "De algehele kwaliteit van de gegevens."
+  },
+    {
+        "question": "GDPR is ontworpen om mensen te helpen het gebruik van hun \"persoonlijke gegevens\" te beschermen en te controleren. Maar wat dekt dat?",
+        "correctanswer": "Alles van beide antwoorden + onder bepaalde omstandigheden, afbeeldingen van uw gezicht en informatie over uw familieleden en andere gegevens",
+        "answer2": "Je naam, e-mailadres, geboortedatum en paspoortnummer - maar verder niets",
+        "answer3": "Je naam, e-mailadres etc. plus uw bankgegevens, berichten op sociale netwerken, medische informatie en het IP-adres van de computer - maar verder niets"
+  }
+
+    ]
 }
