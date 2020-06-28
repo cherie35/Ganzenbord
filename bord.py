@@ -7,7 +7,7 @@ class Bord:
         self.traps = [5,18,30,41,51,57]
 
     def set_colors(self, colors):
-        choices = [(240,78,152), (0,191,179), (0,119,204), (254,197,20)]
+        choices = [(240,78,152), (0,191,179), (0,119,204), (254,197,20), (166, 214,  117)]
         for key in self.shitlist:
             if key > 0:
                 prev_color = colors[key-1]
