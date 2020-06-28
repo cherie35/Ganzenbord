@@ -2,7 +2,7 @@ import sys
 import pygame as pg
 import Intro_screen
 import Quizbehaviour as Quizb
-#import screeninfo as si
+import screeninfo as si
 import random as rd
 
 from bord import Bord
@@ -16,14 +16,20 @@ DICE = 0
 rolled = False
 
 FPS = 60
-#COLORS = []
+
 MONITOR = []
+<<<<<<< Updated upstream
 #for m in si.get_monitors():
 #    MONITOR.append(m)
 #    print(MONITOR[0])
 #SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
 #SCREEN = pg.display.set_mode(SCREEN_SIZE)
 BACKGROUND = pg.image.load("bord.png")
+=======
+for m in si.get_monitors():
+    MONITOR.append(m)
+BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
+>>>>>>> Stashed changes
 
 b = Bord()
 d = Dobbel()
@@ -69,7 +75,6 @@ class App(object):
         self.moving_background()
         if len(self.colors) == 0: b.set_colors(self.colors)
         b.set_polygons(self.screen, self.colors)
-        print(self.colors)
         self.screen.blit(BACKGROUND, [0,0])
         self.s.set_xy(self.screen)
         self.all_sprites.draw(self.screen)
