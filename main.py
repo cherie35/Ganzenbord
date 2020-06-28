@@ -4,6 +4,7 @@ import Intro_screen
 import Quizbehaviour as Quizb
 import screeninfo as si
 import random as rd
+import roundrects
 
 from bord import Bord
 from speler import Speler
@@ -35,9 +36,6 @@ b = Bord()
 d = Dobbel()
 
 
-
-
-
 class App(object):
     def __init__(self):
         self.screen = pg.display.get_surface()
@@ -52,7 +50,7 @@ class App(object):
 
         self.all_sprites = pg.sprite.Group()
         self.all_sprites.add(self.s)
-
+        self.overviewbool = True
         self.number = ''
 
 
@@ -104,6 +102,8 @@ class App(object):
                 self.quizbehaviour.quiz_popup((254, 197, 20))
             if keys[pg.K_p]:
                 print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
+            if keys[pg.K_i]:
+                Intro_screen.Introscreen().game_intro()
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1, 6))
                 self.s.set_location(int(self.number))
@@ -131,6 +131,7 @@ class App(object):
         if rel_x < SCREEN_SIZE[0]:
             SCREEN.blit(self.introbkgd, (rel_x, 0))
         self.screen_x -= 1
+
 
 
 def main():
