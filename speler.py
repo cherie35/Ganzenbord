@@ -50,7 +50,7 @@ class Speler(pg.sprite.Sprite):
             self.location += worp
         self.askquestion = True
     
-    def movement(self):
+    def movement(self, colors):
         if self.tussen != []:
             if [self.rect.center[0], self.rect.center[1]] != self.tussen[0]:
                 diffX = self.xy[self.xy.index(self.tussen[0])][0] - self.xy[self.xy.index(self.tussen[0]) -1][0]
@@ -71,8 +71,8 @@ class Speler(pg.sprite.Sprite):
                 del(self.reverse[0])
         if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
-            print(main.COLORS)
-            self.quizbehaviour.quiz_popup(main.COLORS[10])
+            print(colors)
+            self.quizbehaviour.quiz_popup(colors[10])
             self.askquestion = False
 
 

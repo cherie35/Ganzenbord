@@ -16,7 +16,7 @@ DICE = 0
 rolled = False
 
 FPS = 60
-COLORS = []
+#COLORS = []
 MONITOR = []
 #for m in si.get_monitors():
 #    MONITOR.append(m)
@@ -38,6 +38,7 @@ class App(object):
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
+        self.colors = []
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.introbkgd = pg.image.load("mountains.png").convert()
         self.screen_x = 0
@@ -66,16 +67,18 @@ class App(object):
         """
 
         self.moving_background()
-        if len(COLORS) == 0: b.set_colors(COLORS)
-        b.set_polygons(self.screen, COLORS)
+        if len(self.colors) == 0: b.set_colors(self.colors)
+        b.set_polygons(self.screen, self.colors)
+        print(self.colors)
         self.screen.blit(BACKGROUND, [0,0])
         self.s.set_xy(self.screen)
         self.all_sprites.draw(self.screen)
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
-        if len(COLORS) != 0:
-            self.s.movement()
+        self.s.movement(self.colors)
+        #if len(COLORS) != 0:
+        #    self.s.movement()
 
         self.quizbehaviour.show_score()
 
