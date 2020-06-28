@@ -19,18 +19,9 @@ rolled = False
 FPS = 60
 
 MONITOR = []
-<<<<<<< Updated upstream
-#for m in si.get_monitors():
-#    MONITOR.append(m)
-#    print(MONITOR[0])
-#SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
-#SCREEN = pg.display.set_mode(SCREEN_SIZE)
-BACKGROUND = pg.image.load("bord.png")
-=======
 for m in si.get_monitors():
     MONITOR.append(m)
-BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
->>>>>>> Stashed changes
+BACKGROUND = pg.image.load("bord.png")
 
 b = Bord()
 d = Dobbel()
@@ -79,7 +70,7 @@ class App(object):
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
-        self.s.movement(self.colors)
+        self.s.movement(self.colors, self.screen)
 
         self.quizbehaviour.show_score()
 
