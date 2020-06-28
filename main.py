@@ -23,7 +23,7 @@ MONITOR = []
 #    print(MONITOR[0])
 #SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
 #SCREEN = pg.display.set_mode(SCREEN_SIZE)
-BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
+BACKGROUND = pg.image.load("bord.png")
 
 b = Bord()
 s = Speler(10, 10, 10, 50, 80)
