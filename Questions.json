@@ -6,29 +6,104 @@
         "answer3": ""
   }],
   "geel": [{
-        "question": "De zee is 100m diep, wat is dieper?",
-        "correctanswer": "Je moeder",
-        "answer2": "Marianatroch",
-        "answer3": "Pinkeltje"
+        "question": "Waardoor is Beats onstaan?",
+        "correctanswer": "Om logstash te ontlasten van processen die in logstash prestatieproblemen veroorzaakte",
+        "answer2": "Als aanvulling op Elasticsearch",
+        "answer3": "Om beter bestanden te kunnen visualiseren"
   },
     {
-        "question": "Het belangrijkste voor een Data engineer is?",
-        "correctanswer": "Kennis",
-        "answer2": "Vaardigheden",
-        "answer3": "Puppy Eyes"
+        "question": "Welke rol vervult beats binnen het ETL process?",
+        "correctanswer": "Extract",
+        "answer2": "Transform",
+        "answer3": "Load"
+    },
+    {
+        "question": "Welke beat is geen geldige beat?",
+        "correctanswer": "Logbeat",
+        "answer2": "Metricbeat",
+        "answer3": "FileBeat"
+    },
+    {
+        "question": "Welke gegevens verzameld metricbeat",
+        "correctanswer": "Systeemlevel- en/of serverstatistieken",
+        "answer2": "Json document bestanden",
+        "answer3": "Netwerkverkeer"
+    },
+    {
+        "question": "Welk component gebruikt het minste geheugen voor het ontvangen van data",
+        "correctanswer": "Beats",
+        "answer2": "Logstash",
+        "answer3": "Elasticsearch"
+    },
+    {
+        "question": "hoe stuurt beats data naar elasticsearch",
+        "correctanswer": "beide antwoorden zijn goed",
+        "answer2": "Logstash",
+        "answer3": "Elasticsearch"
     }
   ],
     "aqua":[{
-        "question": "aqua",
-        "correctanswer": "",
-        "answer2": "",
-        "answer3": ""
-  }],
+        "question": "Wat is een cluster in Elasticsearch?",
+        "correctanswer": "Een verzameling van een of meer nodes (servers) die samen de volledige gegevens bevatten en indexerings- en zoekmogelijkheden bieden voor alle nodes.",
+        "answer2": "Een enkele server. Het slaat gegevens op en heeft indexerings- en zoekmogelijkheden",
+        "answer3": "Een logische categorie / partitie van de index waarvan de semantiek volledig aan de gebruiker is"
+  },{
+        "question": "Wat is een node in Elasticsearch?",
+        "correctanswer": "Een node is een enkele server die deel uitmaakt van het cluster. Het slaat de gegevens op en neemt deel aan de indexerings- en zoekmogelijkheden van de clusters.",
+        "answer2": "Een node is een logische categorie / partitie van de index waarvan de semantiek volledig aan de gebruiker is",
+        "answer3": "Een node is Een verzameling van een of meer nodes (servers) die samen de volledige gegevens bevatten en indexerings- en zoekmogelijkheden bieden voor alle nodes."
+  },{
+        "question": "Wat is een index in Elasticsearch?",
+        "correctanswer": "Een index is als een database in een relationele database. Het heeft een mapping die meerdere typen definieert. Een index is een logische naamruimte die wordt toegewezen aan een of meer primaire shards en nul of meer replicashards kan hebben.",
+        "answer2": "Een index is een enkele server die deel uitmaakt van het cluster. Het slaat de gegevens op en neemt deel aan de indexerings- en zoekmogelijkheden van de clusters.",
+        "answer3": "Een index is een logische categorie / partitie van de index waarvan de semantiek volledig aan de gebruiker is"
+  },{
+        "question": "Wat is een document in Elasticsearch?",
+        "correctanswer": "Een document is vergelijkbaar met een rij in relationele databases. Het verschil is dat elk document in een index een andere structuur (velden) kan hebben, maar hetzelfde gegevenstype moet hebben voor algemene velden.",
+        "answer2": "Een document is een logische categorie / partitie van de index waarvan de semantiek volledig aan de gebruiker is",
+        "answer3": "Een document is een enkele server. Het slaat gegevens op en heeft indexerings- en zoekmogelijkheden"
+  },{
+        "question": "Wat is een type in Elasticsearch?",
+        "correctanswer": "Een type is een logische categorie / partitie van de index waarvan de semantiek volledig aan de gebruiker is",
+        "answer2": "Een type is een enkele server. Het slaat gegevens op en heeft indexerings- en zoekmogelijkheden",
+        "answer3": "Een type is vergelijkbaar met een rij in relationele databases. Het verschil is dat elk document in een index een andere structuur (velden) kan hebben, maar hetzelfde gegevenstype moet hebben voor algemene velden."
+  },{
+        "question": "Heeft Elasticsearch een schema?",
+        "correctanswer": "Nee, Elasticsearch is schemaloos",
+        "answer2": "Ja, Elasticsearch heeft altijd een duidelijk schema dat het document type beschrijfd",
+        "answer3": "Elasticsearch kan schemaloos zijn, wat betekent dat documenten kunnen worden geïndexeerd zonder expliciet een schema op te geven. Als je geen toewijzing opgeeft, zal Elasticsearch er standaard dynamisch een genereren wanneer nieuwe velden in documenten worden gedetecteerd tijdens indexering."
+  },{
+        "question": "Wat is een shard in Elasticsearch?",
+        "correctanswer": "Omdat Elasticsearch een gedistribueerde zoekmachine is, wordt een index meestal opgesplitst in elementen, deze elementen noemen we shards.",
+        "answer2": "Een shard is een enkele server. Het slaat gegevens op en heeft indexerings- en zoekmogelijkheden",
+        "answer3": "Een shard is een logische categorie / partitie van de index waarvan de semantiek volledig aan de gebruiker is"
+  },{
+        "question": "Wat voor type database is Elasticsearch",
+        "correctanswer": "Document Database",
+        "answer2": "Relationele Database",
+        "answer3": "Graph Database"
+  }
+    ],
     "blauw":[{
-        "question": "blauw",
-        "correctanswer": "",
-        "answer2": "",
-        "answer3": ""
+        "question": "Wat doet Logstash binnen de Elastic Stack?",
+        "correctanswer": "het innemen van data, deze eventueel transformeren en daarna doorsturen",
+        "answer2": "Het visualiseren van data",
+        "answer3": "Het opslaan van data"
+  },{
+        "question": "Welke rol vervult Logstash binnen het ETL proces(Extract, Transform en Load)?",
+        "correctanswer": "Transform",
+        "answer2": "Extract",
+        "answer3": "Load"
+  },{
+        "question": "Welk van het volgende is een geldige Logstash filter?",
+        "correctanswer": "clone",
+        "answer2": "transform",
+        "answer3": "copy"
+  },{
+        "question": "Een Logstash config file drie secties, welke zijn dit?",
+        "correctanswer": "input, filter, output",
+        "answer2": "input, transform, output",
+        "answer3": "ingest, filter, output"
   }],
     "grijs":[{
         "question": "grijs",

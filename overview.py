@@ -15,6 +15,7 @@ class overview():
         self.question_bg = pg.image.load("Questions_bg.png")
         self.overviewbool = True
         self.clock = pg.time.Clock()
+        self.highscore = HS()
         
     def overview(self, turns, location, speler):
         self.overviewbool = True
@@ -44,7 +45,7 @@ class overview():
             self.draw_text(main.SCREEN, 'aantal beurten:', 40, (main.SCREEN_SIZE[0] / 3), main.SCREEN_SIZE[1] / 2.12, black)
             self.draw_text(main.SCREEN, str(turns), 40, (main.SCREEN_SIZE[0] / 3 + 450), main.SCREEN_SIZE[1] / 2.12, black)
 
-            HS.save_high_score(Quizbehaviour.hiscore[1], Quizbehaviour.hiscore[0], turns)
+            self.highscore.save_high_score(Quizbehaviour.hiscore[1], Quizbehaviour.hiscore[0], turns)
 
             rect = pg.Rect((main.SCREEN_SIZE[0] / 2), (main.SCREEN_SIZE[1] / 1.2), 500, 100)
             rect.center = (main.SCREEN_SIZE[0] / 2, main.SCREEN_SIZE[1] / 1.2)
