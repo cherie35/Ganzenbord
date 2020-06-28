@@ -2,6 +2,7 @@ import sys
 import pygame as pg
 import main
 import overview
+from Highscore import Highscore as HS
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -21,6 +22,9 @@ class Introscreen(object):
         self.font_name = pg.font.match_font('verdana')
         self.manual = pg.image.load("regels.png").convert()
         self.manual.set_colorkey(black)
+        self.score_board = pg.image.load("highscore_bg.png").convert()
+        self.score_board.set_colorkey(black)
+        self.highscore = HS().get_high_score()
 
     def game_intro(self):
         self.introloop = True
@@ -115,7 +119,13 @@ class Introscreen(object):
                    quit()
 
             self.moving_background()
-    
+            rect = pg.Rect(500, 500, 1400, 650)
+            rect2 = pg.Rect(500, 500, 1600, 750)
+            rect.center = (self.screen_size[0] / 2, self.screen_size[1] / 2 - 60)
+            rect2.center = rect.center
+            pg.draw.rect(main.SCREEN, black, rect)
+            main.SCREEN.blit(self.score_board, rect2)
+            self.text_objects(str(self.highscore), self.largetext, (self.screen_size[0] / 2), (self.screen_size[1] / 2))
             self.button("Terug", (self.screen_size[0] / 10), (self.screen_size[1] / 1.1), 200, 75, white, brown, self.game_intro)
     
     
