@@ -15,7 +15,8 @@ class overview():
         self.overviewbool = True
         self.clock = pg.time.Clock()
         
-    def overview(self, turns, location, xy):
+    def overview(self, turns, location, speler):
+        self.overviewbool = True
         while self.overviewbool:
             for event in pg.event.get():
                if event.type == pg.QUIT:
@@ -48,8 +49,11 @@ class overview():
                 roundrects.AAfilledRoundedRect(main.SCREEN, rect, brown)
                 if click[0] == 1:
                     self.overviewbool = False
-                    location = 0
-                    turns = 0
+                    speler.numberofturns = 0
+
+                    Quizbehaviour.hiscore[0] = 0
+                    Quizbehaviour.hiscore[1] = 0
+
                     Intro_screen.Introscreen().game_intro()
             else:
                 roundrects.AAfilledRoundedRect(main.SCREEN, rect, white)

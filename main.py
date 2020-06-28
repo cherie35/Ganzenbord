@@ -100,7 +100,7 @@ class App(object):
                 Intro_screen.Introscreen().game_intro()
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1, 6))
-                self.s.set_location(int(63))
+                self.s.set_location(int(self.number))
 
 
         pg.display.update()
