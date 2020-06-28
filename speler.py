@@ -1,7 +1,6 @@
 import pygame as pg
 import main
 import Quizbehaviour as Quizb
-import traps as traps
 
 
 class Speler(pg.sprite.Sprite):
@@ -15,8 +14,6 @@ class Speler(pg.sprite.Sprite):
 
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.askquestion = False
-
-        self.tricks = traps.Traps()
 
         self.positions = self.get_spelerPositions()
         self.traps = [12,18,31,42,52,58] # Niet dezelfde traps als in bord.py
@@ -53,13 +50,13 @@ class Speler(pg.sprite.Sprite):
             for step in range(self.location, (self.location+worp)-1, -1):
                 self.reverse.append(self.xy[step])
             self.location += worp
-            print(self.location)
         else:
             for step in range(self.location, self.location+worp+1, 1):
                 self.tussen.append(self.xy[step])
             self.location += worp
         self.askquestion = True
     
+
     def movement(self, colors):
         if self.tussen != []:
             if [self.rect.center[0], self.rect.center[1]] != self.tussen[0]:
@@ -82,7 +79,6 @@ class Speler(pg.sprite.Sprite):
                 del(self.reverse[0])
 
         if self.tussen == [] and self.reverse == [] and self.location in self.traps:
-            #self.tricks.set_trap(self.location, self.rect.center, self.xy)
             if self.location == self.traps[0]: self.set_location(-6)
             if self.location == self.traps[1]: self.set_location(int(self.location/ -2))
             if self.location == self.traps[2]: pass

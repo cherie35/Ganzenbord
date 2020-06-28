@@ -16,21 +16,13 @@ DICE = 0
 rolled = False
 
 FPS = 60
-#COLORS = []
 MONITOR = []
 for m in si.get_monitors():
     MONITOR.append(m)
-#    print(MONITOR[0])
-#SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
-#SCREEN = pg.display.set_mode(SCREEN_SIZE)
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
 
 b = Bord()
 d = Dobbel()
-
-
-
-
 
 class App(object):
     def __init__(self):
