@@ -1,7 +1,7 @@
 import pygame as pg
 import main
 import Quizbehaviour as Quizb
-
+import overview
 
 class Speler(pg.sprite.Sprite):
 
@@ -14,12 +14,14 @@ class Speler(pg.sprite.Sprite):
 
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.askquestion = False
+        self.numberofturns = 0
 
         self.positions = self.get_spelerPositions()
         self.location = 0
         self.xy = []
         self.tussen = []
         self.reverse = []
+        self.overview = overview.overview()
 
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load("Data-beestje2.png")
@@ -49,6 +51,7 @@ class Speler(pg.sprite.Sprite):
                 self.tussen.append(self.xy[step])
             self.location += worp
         self.askquestion = True
+        self.numberofturns += 1
     
     def movement(self, colors):
         if self.tussen != []:
@@ -69,9 +72,12 @@ class Speler(pg.sprite.Sprite):
                 if diffX != 0 and diffY != 0: self.rect.center = (self.rect.center[0] - (diffX / 10), self.rect.center[1] - (diffY / 10))
             else:
                 del(self.reverse[0])
-        if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
-        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion and self.location != 63:
+        if self.tussen == [] and self.reverse == [] and self.location == 63:
+            self.rect.center = (490, 910)
+            self.location = 0
+            self.overview.overview(self.numberofturns, self.location, self)
 
+        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion and self.location != 63:
             self.quizbehaviour.quiz_popup(colors[self.location - 1])
             self.askquestion = False
 
