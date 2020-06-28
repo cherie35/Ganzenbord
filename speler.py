@@ -73,7 +73,7 @@ class Speler(pg.sprite.Sprite):
             else:
                 del(self.reverse[0])
         if self.tussen == [] and self.reverse == [] and self.location == 63:
-            self.overview.overview(self.numberofturns, self.location)
+            self.overview.overview(self.numberofturns, self.location, self.xy)
 
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion and self.location != 63:
             self.quizbehaviour.quiz_popup(colors[self.location - 1])

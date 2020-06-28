@@ -4,6 +4,7 @@ import Intro_screen
 import Quizbehaviour as Quizb
 #import screeninfo as si
 import random as rd
+import roundrects
 
 from bord import Bord
 from speler import Speler
@@ -29,9 +30,6 @@ b = Bord()
 d = Dobbel()
 
 
-
-
-
 class App(object):
     def __init__(self):
         self.screen = pg.display.get_surface()
@@ -46,7 +44,7 @@ class App(object):
 
         self.all_sprites = pg.sprite.Group()
         self.all_sprites.add(self.s)
-
+        self.overviewbool = True
         self.number = ''
 
 
@@ -127,6 +125,7 @@ class App(object):
         if rel_x < SCREEN_SIZE[0]:
             SCREEN.blit(self.introbkgd, (rel_x, 0))
         self.screen_x -= 1
+
 
 
 def main():
