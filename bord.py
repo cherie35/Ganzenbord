@@ -21,6 +21,8 @@ class Bord:
                 colors[key] = (72,72,72)
 
     def set_polygons(self, screen, colors):
+        start = [(384, 846),(545, 847),(544, 826),(560, 827),(623, 897),(556, 967),(543, 965),(543, 947),(382, 942)]
+        pg.draw.polygon(screen, (255,255,255), start, 0)
         for key in self.shitlist:
             pg.draw.polygon(screen, colors[key], self.shitlist.get(key), 0)
 
