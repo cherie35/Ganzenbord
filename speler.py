@@ -1,6 +1,7 @@
 import pygame as pg
 import main
 import Quizbehaviour as Quizb
+import traps as traps
 
 
 class Speler(pg.sprite.Sprite):
@@ -15,7 +16,10 @@ class Speler(pg.sprite.Sprite):
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.askquestion = False
 
+        self.tricks = traps.Traps()
+
         self.positions = self.get_spelerPositions()
+        self.traps = [12,18,31,42,52,58] # Niet dezelfde traps als in bord.py
         self.location = 0
         self.xy = []
         self.tussen = []
@@ -38,12 +42,18 @@ class Speler(pg.sprite.Sprite):
 
 
     def set_location(self, worp):
+        print(worp)
         if self.location+worp > 63:
             for step in range(self.location+1, 63+1, 1):
                 self.tussen.append(self.xy[step])
             for step in range(62, 63-(worp - (len(self.tussen)-1)), -1):
                 self.reverse.append(self.xy[step])
             self.location = 63 - (self.location + worp - 63)
+        elif worp < 0:
+            for step in range(self.location, (self.location+worp)-1, -1):
+                self.reverse.append(self.xy[step])
+            self.location += worp
+            print(self.location)
         else:
             for step in range(self.location, self.location+worp+1, 1):
                 self.tussen.append(self.xy[step])
@@ -60,6 +70,7 @@ class Speler(pg.sprite.Sprite):
                 if diffX != 0 and diffY != 0: self.rect.center = (self.rect.center[0] + (diffX / 10), self.rect.center[1] + (diffY / 10))
             else:
                 del(self.tussen[0])
+
         if self.tussen == [] and self.reverse != []:
             if [self.rect.center[0], self.rect.center[1]] != self.reverse[0]:
                 diffX = self.xy[self.xy.index(self.reverse[0]) +1][0] - self.xy[self.xy.index(self.reverse[0])][0]
@@ -69,9 +80,19 @@ class Speler(pg.sprite.Sprite):
                 if diffX != 0 and diffY != 0: self.rect.center = (self.rect.center[0] - (diffX / 10), self.rect.center[1] - (diffY / 10))
             else:
                 del(self.reverse[0])
+
+        if self.tussen == [] and self.reverse == [] and self.location in self.traps:
+            #self.tricks.set_trap(self.location, self.rect.center, self.xy)
+            if self.location == self.traps[0]: self.set_location(-6)
+            if self.location == self.traps[1]: self.set_location(int(self.location/ -2))
+            if self.location == self.traps[2]: pass
+            if self.location == self.traps[3]: self.set_location(-5)
+            if self.location == self.traps[4]: pass
+            if self.location == self.traps[5]: self.set_location(-58)
+            
         if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
+
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
-            print(colors)
             self.quizbehaviour.quiz_popup(colors[self.location - 1])
             self.askquestion = False
 
