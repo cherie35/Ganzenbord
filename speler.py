@@ -85,9 +85,6 @@ class Speler(pg.sprite.Sprite):
             self.location = 0
             self.overview.overview(self.numberofturns, self.location, self)
 
-        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion and self.location != 63:
-            self.quizbehaviour.quiz_popup(colors[self.location - 1])
-
         if self.tussen == [] and self.reverse == [] and self.location in self.traps:
             if self.location == self.traps[0]: self.set_location(-6)
             if self.location == self.traps[1]: self.set_location(int(self.location/ -2))
@@ -95,18 +92,10 @@ class Speler(pg.sprite.Sprite):
             if self.location == self.traps[3]: self.set_location(-5)
             if self.location == self.traps[4]: self.secureBG(screen)
             if self.location == self.traps[5]: self.set_location(-58)
-            
-        if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
-
-        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
-            print("vraag wordt gesteld")
-            self.quizbehaviour.quiz_popup(colors[self.location - 1])
-            self.askquestion = False
 
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.location not in self.traps and self.askquestion:
                 self.quizbehaviour.quiz_popup(colors[self.location - 1])
                 self.askquestion = False
-
 
     def secureBG(self, screen):
         if self.blit != 0:

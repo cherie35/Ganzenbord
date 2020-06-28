@@ -2,7 +2,7 @@ import sys
 import pygame as pg
 import Intro_screen
 import Quizbehaviour as Quizb
-import screeninfo as si
+# import screeninfo as si
 import random as rd
 import roundrects
 
@@ -19,8 +19,8 @@ rolled = False
 FPS = 60
 
 MONITOR = []
-for m in si.get_monitors():
-    MONITOR.append(m)
+# for m in si.get_monitors():
+#     MONITOR.append(m)
 BACKGROUND = pg.image.load("bord.png")
 
 b = Bord()
