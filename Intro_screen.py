@@ -2,6 +2,7 @@ import sys
 import pygame as pg
 import main
 import overview
+from Highscore import Highscore as HS
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -19,6 +20,11 @@ class Introscreen(object):
         self.rules = True
         self.largetext = pg.font.Font('freesansbold.ttf', 115)
         self.font_name = pg.font.match_font('verdana')
+        self.manual = pg.image.load("regels.png").convert()
+        self.manual.set_colorkey(black)
+        self.score_board = pg.image.load("highscore_bg.png").convert()
+        self.score_board.set_colorkey(black)
+        self.highscore = HS().get_high_score()
 
     def game_intro(self):
         self.introloop = True
@@ -91,38 +97,12 @@ class Introscreen(object):
             self.moving_background()
 
             #draw background rectangle
-            rect = pg.Rect(500, 500, 1600, 750)
+            rect = pg.Rect(500, 500, 1400, 650)
+            rect2 = pg.Rect(500, 500, 1600, 750)
             rect.center = (self.screen_size[0] / 2, self.screen_size[1] / 2 - 60)
-            pg.draw.rect(main.SCREEN, brown, rect)
-
-
-            self.draw_text(main.SCREEN, 'REGELS', 63, (self.screen_size[0] - 1600), self.screen_size[1] / 6)
-            self.draw_text(main.SCREEN, 'De bedoeling van het spel is om als eerste op hokje 63 uit te komen. ', 20,
-                      (self.screen_size[0] - 1380), self.screen_size[1] / 2.95)
-            self.draw_text(main.SCREEN,
-                      'Elke speler mag per beurt met de dobbelstenen gooien en de pion zoveel hokjes verplaatsen als er ogen gegooid worden.',
-                      20, (self.screen_size[0] - 1120), self.screen_size[1] / 2.7)
-            self.draw_text(main.SCREEN,
-                      'Wie te veel ogen gooit en daardoor voorbij 63 zou komen, moet vanaf 63 weer teruglopen. ', 20,
-                      (self.screen_size[0] - 1270), self.screen_size[1] / 2.5)
-            self.draw_text(main.SCREEN, 'Het is dan mogelijk dat de speler op het hokje 58 of 52 terechtkomt.', 20,
-                      (self.screen_size[0] - 1388), self.screen_size[1] / 2.3)
-            self.draw_text(main.SCREEN,
-                      'Komt de speler bij het terugtellen op een hokje met een gans, dan telt de speler het gegooide aantal ogen terug.',
-                      20, (self.screen_size[0] - 1165), self.screen_size[1] / 2.15)
-            self.draw_text(main.SCREEN, 'Het speelbord heeft een aantal hokjes met een speciale betekenis:', 20,
-                      (self.screen_size[0] - 1370), self.screen_size[1] / 1.8)
-            self.draw_text(main.SCREEN, '- Pipeline   >   ga verder naar 12', 20, (self.screen_size[0] - 1472),
-                      self.screen_size[1] / 1.72)
-            self.draw_text(main.SCREEN, '- Lag   >   sla 1 beurt over', 20, (self.screen_size[0] - 1505), self.screen_size[1] / 1.67)
-            self.draw_text(main.SCREEN, '- Geen RAM vrij   >   sla 2 beurten over', 20, (self.screen_size[0] - 1438),
-                      self.screen_size[1] / 1.62)
-            self.draw_text(main.SCREEN, '- Blue screen of death   >   ga terug naar 39', 20, (self.screen_size[0] - 1415),
-                      self.screen_size[1] / 1.57)
-            self.draw_text(main.SCREEN, '- Privacy schending. Je hebt een rechtszaak!   >   sla 2 beurten over', 20,
-                      (self.screen_size[0] - 1295), self.screen_size[1] / 1.52)
-            self.draw_text(main.SCREEN, '- Server crash   >   ga terug naar begin', 20, (self.screen_size[0] - 1440),
-                      self.screen_size[1] / 1.48)
+            rect2.center = rect.center
+            pg.draw.rect(main.SCREEN, black, rect)
+            main.SCREEN.blit(self.manual, rect2)
 
             self.button("Terug", (self.screen_size[0] / 10), (self.screen_size[1] / 1.1), 200, 75, white, brown, self.game_intro)
 
@@ -139,7 +119,13 @@ class Introscreen(object):
                    quit()
 
             self.moving_background()
-    
+            rect = pg.Rect(500, 500, 1400, 650)
+            rect2 = pg.Rect(500, 500, 1600, 750)
+            rect.center = (self.screen_size[0] / 2, self.screen_size[1] / 2 - 60)
+            rect2.center = rect.center
+            pg.draw.rect(main.SCREEN, black, rect)
+            main.SCREEN.blit(self.score_board, rect2)
+            self.text_objects(str(self.highscore), self.largetext, (self.screen_size[0] / 2), (self.screen_size[1] / 2))
             self.button("Terug", (self.screen_size[0] / 10), (self.screen_size[1] / 1.1), 200, 75, white, brown, self.game_intro)
     
     

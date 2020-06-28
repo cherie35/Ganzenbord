@@ -1,3 +1,4 @@
+from Highscore import Highscore as HS
 import main
 import pygame as pg
 import Quizbehaviour
@@ -14,6 +15,7 @@ class overview():
         self.question_bg = pg.image.load("Questions_bg.png")
         self.overviewbool = True
         self.clock = pg.time.Clock()
+        self.highscore = HS()
         
     def overview(self, turns, location, speler):
         self.overviewbool = True
@@ -42,6 +44,24 @@ class overview():
 
             self.draw_text(main.SCREEN, 'aantal beurten:', 40, (main.SCREEN_SIZE[0] / 3), main.SCREEN_SIZE[1] / 2.12, black)
             self.draw_text(main.SCREEN, str(turns), 40, (main.SCREEN_SIZE[0] / 3 + 450), main.SCREEN_SIZE[1] / 2.12, black)
+
+            self.total = self.highscore.calc_score(Quizbehaviour.hiscore[1], Quizbehaviour.hiscore[0], turns)
+
+            self.draw_text(main.SCREEN, 'Totaalscore:', 40, (main.SCREEN_SIZE[0] / 3), main.SCREEN_SIZE[1] / 1.8,black)
+            self.draw_text(main.SCREEN, str(self.total), 40, (main.SCREEN_SIZE[0] / 3 + 450), main.SCREEN_SIZE[1] / 1.8, black)
+
+            outcome = self.highscore.calc_score(Quizbehaviour.hiscore[1], Quizbehaviour.hiscore[0], turns)
+            current_hs = self.highscore.get_high_score()
+            print(outcome, current_hs)
+            if outcome < current_hs:
+                self.draw_text(main.SCREEN, 'Helaas, je hebt de highscore niet verbeterd. Probeer het nog eens!', 30, (main.SCREEN_SIZE[0] / 2), main.SCREEN_SIZE[1] / 1.4, black)
+            elif outcome > current_hs:
+                self.draw_text(main.SCREEN, 'Gefeliciteerd! Je hebt de nieuwe highscore gevestigd', 30, (main.SCREEN_SIZE[0] / 2), main.SCREEN_SIZE[1] / 1.4, black)
+            else:
+                self.draw_text(main.SCREEN, 'Je hebt de highscore gehaald!', 30,
+                               (main.SCREEN_SIZE[0] / 2), main.SCREEN_SIZE[1] / 1.4, black)
+
+            self.highscore.save_high_score(Quizbehaviour.hiscore[1], Quizbehaviour.hiscore[0], turns)
 
             rect = pg.Rect((main.SCREEN_SIZE[0] / 2), (main.SCREEN_SIZE[1] / 1.2), 500, 100)
             rect.center = (main.SCREEN_SIZE[0] / 2, main.SCREEN_SIZE[1] / 1.2)
