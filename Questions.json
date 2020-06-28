@@ -1,6 +1,6 @@
 {
   "paars":[{
-        "question": "",
+        "question": "paars",
         "correctanswer": "",
         "answer2": "",
         "answer3": ""
@@ -19,13 +19,19 @@
     }
   ],
     "aqua":[{
-        "question": "",
+        "question": "aqua",
         "correctanswer": "",
         "answer2": "",
         "answer3": ""
   }],
     "blauw":[{
-        "question": "",
+        "question": "blauw",
+        "correctanswer": "",
+        "answer2": "",
+        "answer3": ""
+  }],
+    "grijs":[{
+        "question": "grijs",
         "correctanswer": "",
         "answer2": "",
         "answer3": ""

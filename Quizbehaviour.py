@@ -61,18 +61,20 @@ class Quizbehaviour(object):
 
         if self.color == "grijs":
             self.quiz = False
-        questiondata = self.questioncolors.get(self.color)
-        random.shuffle(questiondata)
+        else:
+
+            questiondata = self.questioncolors[self.color]
+            random.shuffle(questiondata)
 
 
-        text = questiondata[0]['question']
+            text = questiondata[0]['question']
 
-        #put answers in a list and shuffle the list, so that answers aren't in the same position every time
-        correctanswer = questiondata[0]['correctanswer']
-        answer2 = questiondata[0]['answer2']
-        answer3 = questiondata[0]['answer3']
-        answerlist = [correctanswer,answer2,answer3]
-        random.shuffle(answerlist)
+            #put answers in a list and shuffle the list, so that answers aren't in the same position every time
+            correctanswer = questiondata[0]['correctanswer']
+            answer2 = questiondata[0]['answer2']
+            answer3 = questiondata[0]['answer3']
+            answerlist = [correctanswer,answer2,answer3]
+            random.shuffle(answerlist)
 
 
         while self.quiz:
