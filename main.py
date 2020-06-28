@@ -2,7 +2,7 @@ import sys
 import pygame as pg
 import Intro_screen
 import Quizbehaviour as Quizb
-#import screeninfo as si
+import screeninfo as si
 import random as rd
 import roundrects
 
@@ -17,13 +17,10 @@ DICE = 0
 rolled = False
 
 FPS = 60
-#COLORS = []
+
 MONITOR = []
-#for m in si.get_monitors():
-#    MONITOR.append(m)
-#    print(MONITOR[0])
-#SCREEN_SIZE = (MONITOR[0].width, MONITOR[0].height)
-#SCREEN = pg.display.set_mode(SCREEN_SIZE)
+for m in si.get_monitors():
+    MONITOR.append(m)
 BACKGROUND = pg.image.load("bord.png")
 
 b = Bord()
@@ -73,7 +70,7 @@ class App(object):
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
-        self.s.movement(self.colors)
+        self.s.movement(self.colors, self.screen)
 
         self.quizbehaviour.show_score()
 

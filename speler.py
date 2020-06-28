@@ -17,6 +17,7 @@ class Speler(pg.sprite.Sprite):
         self.numberofturns = 0
 
         self.positions = self.get_spelerPositions()
+        self.traps = [12,18,31,42,52,58] # Niet dezelfde traps als in bord.py
         self.location = 0
         self.xy = []
         self.tussen = []
@@ -40,12 +41,17 @@ class Speler(pg.sprite.Sprite):
 
 
     def set_location(self, worp):
+        self.blit = 30
         if self.location+worp > 63:
             for step in range(self.location+1, 63+1, 1):
                 self.tussen.append(self.xy[step])
             for step in range(62, 63-(worp - (len(self.tussen)-1)), -1):
                 self.reverse.append(self.xy[step])
             self.location = 63 - (self.location + worp - 63)
+        elif worp < 0:
+            for step in range(self.location, (self.location+worp)-1, -1):
+                self.reverse.append(self.xy[step])
+            self.location += worp
         else:
             for step in range(self.location, self.location+worp+1, 1):
                 self.tussen.append(self.xy[step])
@@ -53,7 +59,8 @@ class Speler(pg.sprite.Sprite):
         self.askquestion = True
         self.numberofturns += 1
     
-    def movement(self, colors):
+
+    def movement(self, colors, screen):
         if self.tussen != []:
             if [self.rect.center[0], self.rect.center[1]] != self.tussen[0]:
                 diffX = self.xy[self.xy.index(self.tussen[0])][0] - self.xy[self.xy.index(self.tussen[0]) -1][0]
@@ -63,6 +70,7 @@ class Speler(pg.sprite.Sprite):
                 if diffX != 0 and diffY != 0: self.rect.center = (self.rect.center[0] + (diffX / 10), self.rect.center[1] + (diffY / 10))
             else:
                 del(self.tussen[0])
+
         if self.tussen == [] and self.reverse != []:
             if [self.rect.center[0], self.rect.center[1]] != self.reverse[0]:
                 diffX = self.xy[self.xy.index(self.reverse[0]) +1][0] - self.xy[self.xy.index(self.reverse[0])][0]
@@ -79,8 +87,44 @@ class Speler(pg.sprite.Sprite):
 
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion and self.location != 63:
             self.quizbehaviour.quiz_popup(colors[self.location - 1])
+
+        if self.tussen == [] and self.reverse == [] and self.location in self.traps:
+            if self.location == self.traps[0]: self.set_location(-6)
+            if self.location == self.traps[1]: self.set_location(int(self.location/ -2))
+            if self.location == self.traps[2]: self.overloadBG(screen)
+            if self.location == self.traps[3]: self.set_location(-5)
+            if self.location == self.traps[4]: self.secureBG(screen)
+            if self.location == self.traps[5]: self.set_location(-58)
+            
+        if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
+
+        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
+            print("vraag wordt gesteld")
+            self.quizbehaviour.quiz_popup(colors[self.location - 1])
             self.askquestion = False
 
+        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.location not in self.traps and self.askquestion:
+                self.quizbehaviour.quiz_popup(colors[self.location - 1])
+                self.askquestion = False
+
+
+    def secureBG(self, screen):
+        if self.blit != 0:
+            text_rect = pg.draw.rect(screen, (0,0,0), (550, 100, 900, 100), 0)
+            image = pg.image.load("Security_bg2.png").convert()
+            image.set_colorkey((0,0,0))
+            screen.blit(image, (0,0))
+            self.blit -= 1
+            pg.display.update()
+
+    def overloadBG(self, screen):
+        if self.blit != 0:
+            text_rect = pg.draw.rect(screen, (0,0,0), (900, 400, 600, 300), 0)
+            image = pg.image.load("Overload_bg.png").convert()
+            image.set_colorkey((0,0,0))
+            screen.blit(image, (0,0))
+            self.blit -= 1
+            pg.display.update()
 
     def get_spelerPositions(self):
         self.positions = [[45,24],[45,32],[45,36],[45,40],[45,44],[45,48],

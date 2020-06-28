@@ -1,10 +1,36 @@
 {
   "paars":[{
-        "question": "paars",
-        "correctanswer": "",
-        "answer2": "",
-        "answer3": ""
-  }],
+        "question": "Welke rol vervult Kibana binnen het ETL process?",
+        "correctanswer": "Geen, Kibana wordt gebruikt om data te visualiseren",
+        "answer2": "Transform",
+        "answer3": "Extract"
+  },{
+        "question": "Wat is er niet mogelijk met Kibana?",
+        "correctanswer": "Databases aanmaken",
+        "answer2": "Pipelines beheren",
+        "answer3": "Veranderingen in data automatisch laten volgen"
+  },{
+        "question": "Wat is een Kibana dashboard?",
+        "correctanswer": "Een Kibana uitbreiding waarmee men gepersonaliseerde grafiekelementen kan creëren",
+        "answer2": "Een uitbreiding om data in de database mee te beinvloeden",
+        "answer3": "Een uitbreiding om gebruikers mee aan te maken"
+  },{
+        "question": "Wat zijn smart suggestions in Kibana?",
+        "correctanswer": "Suggesties voor alternatieve manieren van het visualiseren van de beschikbare data.",
+        "answer2": "Suggesties om de datakwaliteit mee te verbeteren",
+        "answer3": "Suggesties die fouten weergeven"
+  },{
+        "question": "Welke type grafieken zijn niet standaard beschikbaar binnen kibana?",
+        "correctanswer": "3d grafieken",
+        "answer2": "Cirkeldiagrammen",
+        "answer3": "Staafgrafieken"
+  },{
+        "question": "Kibana kan niet in real-time data visualiseren?",
+        "correctanswer": "Fout",
+        "answer2": "Goed",
+        "answer3": "Beide"
+  }
+  ],
   "geel": [{
         "question": "Waardoor is Beats onstaan?",
         "correctanswer": "Om logstash te ontlasten van processen die in logstash prestatieproblemen veroorzaakte",
@@ -12,19 +38,19 @@
         "answer3": "Om beter bestanden te kunnen visualiseren"
   },
     {
-        "question": "Welke rol vervult beats binnen het ETL process?",
+        "question": "Welke rol vervult Beats binnen het ETL process?",
         "correctanswer": "Extract",
         "answer2": "Transform",
         "answer3": "Load"
     },
     {
-        "question": "Welke beat is geen geldige beat?",
+        "question": "Welke beat is geen geldige Beat?",
         "correctanswer": "Logbeat",
         "answer2": "Metricbeat",
         "answer3": "FileBeat"
     },
     {
-        "question": "Welke gegevens verzameld metricbeat",
+        "question": "Welke gegevens verzameld MetricBeat",
         "correctanswer": "Systeemlevel- en/of serverstatistieken",
         "answer2": "Json document bestanden",
         "answer3": "Netwerkverkeer"
@@ -36,8 +62,8 @@
         "answer3": "Elasticsearch"
     },
     {
-        "question": "hoe stuurt beats data naar elasticsearch",
-        "correctanswer": "beide antwoorden zijn goed",
+        "question": "Hoe stuurt beats data naar elasticsearch",
+        "correctanswer": "Beide antwoorden zijn goed",
         "answer2": "Logstash",
         "answer3": "Elasticsearch"
     }
@@ -86,12 +112,12 @@
     ],
     "blauw":[{
         "question": "Wat doet Logstash binnen de Elastic Stack?",
-        "correctanswer": "het innemen van data, deze eventueel transformeren en daarna doorsturen",
+        "correctanswer": "Het innemen van data, deze eventueel transformeren en daarna doorsturen",
         "answer2": "Het visualiseren van data",
         "answer3": "Het opslaan van data"
   },{
         "question": "Welke rol vervult Logstash binnen het ETL proces(Extract, Transform en Load)?",
-        "correctanswer": "Transform",
+        "correctanswer": "Transform & Load",
         "answer2": "Extract",
         "answer3": "Load"
   },{
@@ -100,10 +126,10 @@
         "answer2": "transform",
         "answer3": "copy"
   },{
-        "question": "Een Logstash config file drie secties, welke zijn dit?",
-        "correctanswer": "input, filter, output",
-        "answer2": "input, transform, output",
-        "answer3": "ingest, filter, output"
+        "question": "Een Logstash config file heeft drie secties, welke zijn dit?",
+        "correctanswer": "Input, filter, output",
+        "answer2": "Input, transform, output",
+        "answer3": "Ingest, filter, output"
   }],
     "grijs":[{
         "question": "grijs",
@@ -118,16 +144,16 @@
         "answer3": "Integriteit"
   },
     {
-        "question": "waarom zouden bedrijven belang moeten hechten aan de kwaliteit van hun gegevens",
+        "question": "Waarom zouden bedrijven belang moeten hechten aan de kwaliteit van hun gegevens",
         "correctanswer": "Betere data kwaliteit betekent betere beslissingen",
         "answer2": "Niet, data kwaliteit voegt geen waarde toe",
         "answer3": "Betere data = meer inkomsten"
   },
     {
         "question": "Wat doen geverifieerde gegevens?",
-        "correctanswer": "goede kwaliteit data mogelijk maken",
-        "answer2": "gegevens verifieeren",
-        "answer3": "toe staan dat bronnen worden erkend"
+        "correctanswer": "Goede kwaliteit data mogelijk maken",
+        "answer2": "Gegevens verifieeren",
+        "answer3": "Toe staan dat bronnen worden erkend"
   },
     {
         "question": "Wat wordt er bedoeld met data kwaliteit",
@@ -137,9 +163,9 @@
   },
     {
         "question": "Wat is een data warehouse",
-        "correctanswer": "\nEen grote opslag van gegevens verzameld uit een breed scala aan bronnen binnen een bedrijf dat wordt gebruikt om managementbeslissingen te sturen",
-        "answer2": "een warehouse in een database",
-        "answer3": "een warehouse vol met databases"
+        "correctanswer": "Een grote opslag van gegevens verzameld uit een breed scala aan bronnen binnen een bedrijf dat wordt gebruikt om managementbeslissingen te sturen",
+        "answer2": "Een warehouse in een database",
+        "answer3": "Een warehouse vol met databases"
   },
     {
         "question": "Wat is data mining",
@@ -150,11 +176,11 @@
     {
         "question": "Wat moet er gebeuren met ontbrekende waardes in binnenkomende data",
         "correctanswer": "Data niet importeren, en een log maken van de data met ontbrekende waardes",
-        "answer2": "negeren en data blijven importeren",
-        "answer3": "ontbrekende waarde vullen met willekeurige data en dan importeren"
+        "answer2": "Negeren en data blijven importeren",
+        "answer3": "Ontbrekende waarde vullen met willekeurige data en dan importeren"
   },
     {
-        "question": "\nWat wordt bedoeld met de term 'nauwkeurigheid' binnen data kwaliteit?",
+        "question": "Wat wordt bedoeld met de term 'nauwkeurigheid' binnen data kwaliteit?",
         "correctanswer": "De mate waarin een waarde de werkelijke waarde benadert.",
         "answer2": "Het detailniveau waarop gegevens worden opgeslagen.",
         "answer3": "De algehele kwaliteit van de gegevens."
