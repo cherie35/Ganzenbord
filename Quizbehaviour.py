@@ -36,12 +36,14 @@ class Quizbehaviour(object):
         self.blue_questions = self.questiondata["blauw"].copy()
         self.aqua_questions = self.questiondata["aqua"].copy()
         self.paars_questions = self.questiondata["paars"].copy()
+        self.security_question = self.questiondata["grijsSecurity"].copy()
 
         self.questioncolors = {
             "geel": self.yellow_questions,
             "blauw": self.blue_questions,
             "aqua": self.aqua_questions,
-            "paars": self.paars_questions
+            "paars": self.paars_questions,
+            "grijsSecurity": self.security_question
         }
 
         self.lookuprgb = {
@@ -53,16 +55,15 @@ class Quizbehaviour(object):
         }
 
 
-    def quiz_popup(self, color):
+    def quiz_popup(self, color, location):
         self.quiz = True
 
         self.color = self.lookuprgb[color]
         self.question_bg = pg.image.load("Questions_bg.png")
 
-        if self.color == "grijs":
+        if self.color == "grijs": 
             self.quiz = False
         else:
-
             questiondata = self.questioncolors[self.color]
             random.shuffle(questiondata)
 
@@ -169,7 +170,7 @@ class Quizbehaviour(object):
         hiscore[1] += 1
 
     def remove_askedquestion(self, questions, color):
-        if len(questions) > 1:
+        if len(questions) > 1 :
             questions.pop(0)
         else:
             questions.extend(self.questiondata[color])

@@ -14,6 +14,7 @@ class Speler(pg.sprite.Sprite):
 
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.askquestion = False
+        self.clock = pg.time.Clock()
 
         self.positions = self.get_spelerPositions()
         self.traps = [12,18,31,42,52,58] # Niet dezelfde traps als in bord.py
@@ -39,7 +40,7 @@ class Speler(pg.sprite.Sprite):
 
 
     def set_location(self, worp):
-        print(worp)
+        self.blit = 30
         if self.location+worp > 63:
             for step in range(self.location+1, 63+1, 1):
                 self.tussen.append(self.xy[step])
@@ -57,7 +58,7 @@ class Speler(pg.sprite.Sprite):
         self.askquestion = True
     
 
-    def movement(self, colors):
+    def movement(self, colors, screen):
         if self.tussen != []:
             if [self.rect.center[0], self.rect.center[1]] != self.tussen[0]:
                 diffX = self.xy[self.xy.index(self.tussen[0])][0] - self.xy[self.xy.index(self.tussen[0]) -1][0]
@@ -81,17 +82,35 @@ class Speler(pg.sprite.Sprite):
         if self.tussen == [] and self.reverse == [] and self.location in self.traps:
             if self.location == self.traps[0]: self.set_location(-6)
             if self.location == self.traps[1]: self.set_location(int(self.location/ -2))
-            if self.location == self.traps[2]: pass
+            if self.location == self.traps[2]: self.overloadBG(screen)
             if self.location == self.traps[3]: self.set_location(-5)
-            if self.location == self.traps[4]: pass
+            if self.location == self.traps[4]: self.secureBG(screen)
             if self.location == self.traps[5]: self.set_location(-58)
             
         if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
 
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
-            self.quizbehaviour.quiz_popup(colors[self.location - 1])
+            print("vraag wordt gesteld")
+            self.quizbehaviour.quiz_popup(colors[self.location - 1], self.location)
             self.askquestion = False
 
+    def secureBG(self, screen):
+        if self.blit != 0:
+            text_rect = pg.draw.rect(screen, (0,0,0), (550, 100, 900, 100), 0)
+            image = pg.image.load("Security_bg2.png").convert()
+            image.set_colorkey((0,0,0))
+            screen.blit(image, (0,0))
+            self.blit -= 1
+            pg.display.update()
+
+    def overloadBG(self, screen):
+        if self.blit != 0:
+            text_rect = pg.draw.rect(screen, (0,0,0), (900, 400, 600, 300), 0)
+            image = pg.image.load("Overload_bg.png").convert()
+            image.set_colorkey((0,0,0))
+            screen.blit(image, (0,0))
+            self.blit -= 1
+            pg.display.update()
 
     def get_spelerPositions(self):
         self.positions = [[45,24],[45,32],[45,36],[45,40],[45,44],[45,48],
