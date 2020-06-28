@@ -36,12 +36,14 @@ class Quizbehaviour(object):
         self.blue_questions = self.questiondata["blauw"].copy()
         self.aqua_questions = self.questiondata["aqua"].copy()
         self.paars_questions = self.questiondata["paars"].copy()
+        self.groen_questions = self.questiondata["groen"].copy()
 
         self.questioncolors = {
             "geel": self.yellow_questions,
             "blauw": self.blue_questions,
             "aqua": self.aqua_questions,
-            "paars": self.paars_questions
+            "paars": self.paars_questions,
+            "groen": self.groen_questions
         }
 
         self.lookuprgb = {
@@ -49,6 +51,7 @@ class Quizbehaviour(object):
             (0,191,179): "aqua",
             (0, 119, 204): "blauw",
             (254, 197, 20): "geel",
+            (166, 214,  117): "groen",
             (72, 72, 72): "grijs"
         }
 
