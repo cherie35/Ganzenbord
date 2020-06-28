@@ -40,8 +40,8 @@ class Quizbehaviour(object):
         self.questioncolors = {
             "geel": self.yellow_questions,
             "blauw": self.blue_questions,
-            "paars": self.aqua_questions,
-            "aqua": self.paars_questions
+            "aqua": self.aqua_questions,
+            "paars": self.paars_questions
         }
 
         self.lookuprgb = {

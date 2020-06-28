@@ -77,8 +77,6 @@ class App(object):
         d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
         self.s.movement(self.colors)
-        #if len(COLORS) != 0:
-        #    self.s.movement()
 
         self.quizbehaviour.show_score()
 
@@ -104,7 +102,6 @@ class App(object):
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1, 6))
                 self.s.set_location(int(self.number))
-                #self.quizbehaviour.quiz_popup(COLORS[self.s.location - 1])
 
 
         pg.display.update()
