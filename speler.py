@@ -13,7 +13,6 @@ class Speler(pg.sprite.Sprite):
         self.column = column
 
         self.quizbehaviour = Quizb.Quizbehaviour()
-        self.trick = traps.Traps()
         self.askquestion = False
         self.numberofturns = 0
 
@@ -28,7 +27,7 @@ class Speler(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load("Data-beestje2.png")
         self.rect =  self.image.get_rect()
-        self.rect.center = (650, 290)#(490, 910)#(570, 350)
+        self.rect.center = (490, 910)
 
 
     def set_xy(self, screen):
@@ -47,20 +46,16 @@ class Speler(pg.sprite.Sprite):
             for step in range(self.location+1, 63+1, 1):
                 self.tussen.append(self.xy[step])
             for step in range(62, 63-(worp - (len(self.tussen)-1)), -1):
-                print("in set_location if-loop")
                 self.reverse.append(self.xy[step])
-                print("stappen toegevoegd aan reverse lijst")
             self.location = 63 - (self.location + worp - 63)
         elif worp < 0:
             for step in range(self.location, (self.location+worp)-1, -1):
                 self.reverse.append(self.xy[step])
             self.location += worp
         else:
-            print("set_location else")
             for step in range(self.location, self.location+worp+1, 1):
                 self.tussen.append(self.xy[step])
             self.location += worp
-            print("new location: {}".format(self.location))
         self.askquestion = True
         self.numberofturns += 1
     
@@ -77,7 +72,6 @@ class Speler(pg.sprite.Sprite):
                 del(self.tussen[0])
 
         if self.tussen == [] and self.reverse != []:
-            print("in reverse lijst")
             if [self.rect.center[0], self.rect.center[1]] != self.reverse[0]:
                 diffX = self.xy[self.xy.index(self.reverse[0]) +1][0] - self.xy[self.xy.index(self.reverse[0])][0]
                 diffY = self.xy[self.xy.index(self.reverse[0]) +1][1] - self.xy[self.xy.index(self.reverse[0])][1]
@@ -106,18 +100,13 @@ class Speler(pg.sprite.Sprite):
 
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
             print("vraag wordt gesteld")
-            self.quizbehaviour.quiz_popup(colors[self.location - 1], self.location)
+            self.quizbehaviour.quiz_popup(colors[self.location - 1])
             self.askquestion = False
-=======
-        if self.tussen == [] and self.reverse == [] and self.location in self.traps: 
-                print("location in traps")
-                self.trick.set_trap(self.location)#actie = self.trick.set_trap(self.location)
-                #self.set_location(actie)
-        else:   print("loop wordt meegenomen, maar is False")
+
         if self.tussen == [] and self.reverse == [] and self.location != 0 and self.location not in self.traps and self.askquestion:
                 self.quizbehaviour.quiz_popup(colors[self.location - 1])
                 self.askquestion = False
->>>>>>> Stashed changes
+
 
     def secureBG(self, screen):
         if self.blit != 0:

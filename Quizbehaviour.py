@@ -56,7 +56,7 @@ class Quizbehaviour(object):
         }
 
 
-    def quiz_popup(self, color, location):
+    def quiz_popup(self, color):
         self.quiz = True
 
         self.color = self.lookuprgb[color]
