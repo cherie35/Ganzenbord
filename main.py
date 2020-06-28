@@ -16,7 +16,7 @@ DICE = 0
 rolled = False
 
 FPS = 60
-COLORS = []
+#COLORS = []
 MONITOR = []
 #for m in si.get_monitors():
 #    MONITOR.append(m)
@@ -26,11 +26,9 @@ MONITOR = []
 BACKGROUND = pg.image.load("Ganzenbord_Template_TransCrop6.png")
 
 b = Bord()
-s = Speler(10, 10, 10, 50, 80)
 d = Dobbel()
 
-all_sprites = pg.sprite.Group()
-all_sprites.add(s)
+
 
 
 
@@ -40,9 +38,14 @@ class App(object):
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.done = False
+        self.colors = []
         self.quizbehaviour = Quizb.Quizbehaviour()
         self.introbkgd = pg.image.load("mountains.png").convert()
         self.screen_x = 0
+        self.s = Speler(10, 10, 10, 50, 80)
+
+        self.all_sprites = pg.sprite.Group()
+        self.all_sprites.add(self.s)
 
         self.number = ''
 
@@ -55,7 +58,7 @@ class App(object):
         For example, updates based on held keys should be found here, but
         updates to single KEYDOWN events would be found in the event loop.
         """
-        all_sprites.update()
+        self.all_sprites.update()
 
     def render(self):
         """
@@ -64,15 +67,18 @@ class App(object):
         """
 
         self.moving_background()
-        if len(COLORS) == 0: b.set_colors(COLORS)
-        b.set_polygons(self.screen, COLORS)
+        if len(self.colors) == 0: b.set_colors(self.colors)
+        b.set_polygons(self.screen, self.colors)
+        print(self.colors)
         self.screen.blit(BACKGROUND, [0,0])
-        s.set_xy(self.screen)
-        all_sprites.draw(self.screen)
+        self.s.set_xy(self.screen)
+        self.all_sprites.draw(self.screen)
         d.hover(self.screen, pg.mouse.get_pos())
         d.message_display(self.screen, "Roll")
         d.roll_outcome(self.screen, self.number)
-        s.movement()
+        self.s.movement(self.colors)
+
+        self.quizbehaviour.show_score()
 
         pg.display.update()
 
@@ -90,22 +96,13 @@ class App(object):
             if event.type == pg.QUIT:
                 self.done = True
             if keys[pg.K_g]:
-                self.quizbehaviour.quiz_popup("red")
+                self.quizbehaviour.quiz_popup((254, 197, 20))
             if keys[pg.K_p]:
                 print("Questions:" + str(Quizb.hiscore[1]) + " correct answers:" + str(Quizb.hiscore[0]))
             if event.type == pg.MOUSEBUTTONDOWN and d.hover(self.screen, pg.mouse.get_pos()) == True:
                 self.number = str(rd.randint(1, 6))
-                s.set_location(int(self.number))
-                
+                self.s.set_location(int(self.number))
 
-            if event.type == pg.KEYDOWN:
-               if event.key == pg.K_SPACE:
-                   DICE = dice.roll_dice()
-                   rolled = True
-               if (rolled):
-                   dice.display_dice(DICE)
-                   dice.roll_msg()
-                   rolled = False
 
         pg.display.update()
 

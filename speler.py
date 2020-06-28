@@ -1,4 +1,7 @@
 import pygame as pg
+import main
+import Quizbehaviour as Quizb
+
 
 class Speler(pg.sprite.Sprite):
 
@@ -8,6 +11,9 @@ class Speler(pg.sprite.Sprite):
         self.margin = margin
         self.row = row
         self.column = column
+
+        self.quizbehaviour = Quizb.Quizbehaviour()
+        self.askquestion = False
 
         self.positions = self.get_spelerPositions()
         self.location = 0
@@ -42,9 +48,9 @@ class Speler(pg.sprite.Sprite):
             for step in range(self.location, self.location+worp+1, 1):
                 self.tussen.append(self.xy[step])
             self.location += worp
-
+        self.askquestion = True
     
-    def movement(self):
+    def movement(self, colors):
         if self.tussen != []:
             if [self.rect.center[0], self.rect.center[1]] != self.tussen[0]:
                 diffX = self.xy[self.xy.index(self.tussen[0])][0] - self.xy[self.xy.index(self.tussen[0]) -1][0]
@@ -64,6 +70,10 @@ class Speler(pg.sprite.Sprite):
             else:
                 del(self.reverse[0])
         if self.tussen == [] and self.reverse == [] and self.location == 63: print("Woohoo! Finished :D")
+        if self.tussen == [] and self.reverse == [] and self.location != 0 and self.askquestion:
+            print(colors)
+            self.quizbehaviour.quiz_popup(colors[self.location - 1])
+            self.askquestion = False
 
 
     def get_spelerPositions(self):
